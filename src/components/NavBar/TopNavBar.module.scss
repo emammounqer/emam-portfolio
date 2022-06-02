@@ -2,11 +2,13 @@ $nav-height: 3em;
 
 .container {
   display: flex;
+  position: relative;
   align-items: center;
   height: $nav-height;
   padding-inline: 12em;
 
   background-color: var(--color-main-sec);
+  z-index: 1001;
 }
 
 .logo {

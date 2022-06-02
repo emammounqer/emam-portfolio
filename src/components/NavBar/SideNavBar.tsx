@@ -1,9 +1,23 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useEffect } from "react";
+import { NavState } from "./NavBar";
 import styles from "./SideNavBar.module.scss";
 
-export const SideNavBar = forwardRef<HTMLElement>((props, ref) => {
+interface props {
+  navState: string;
+  setNavState: React.Dispatch<React.SetStateAction<NavState>>;
+}
+
+export const SideNavBar: React.FC<props> = ({ navState }) => {
+  useEffect(() => {
+    if (navState === "side") {
+    }
+  }, [navState]);
   return (
-    <nav className={styles.container} ref={ref}>
+    <nav
+      className={`${styles.container} ${
+        navState === "side" ? styles.containerActive : ""
+      }`}
+    >
       <ul className={styles.navLinks} role="list">
         <li>
           <a href="">Home</a>
@@ -17,6 +31,6 @@ export const SideNavBar = forwardRef<HTMLElement>((props, ref) => {
       </ul>
     </nav>
   );
-});
+};
 
 export default SideNavBar;

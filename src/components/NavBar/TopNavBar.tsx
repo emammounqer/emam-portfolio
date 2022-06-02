@@ -1,15 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./TopNavBar.module.scss";
 import { useInView } from "../../hooks/useInView";
+import { NavState } from "./NavBar";
 
 interface props {
-  setIsTopNavInView: React.Dispatch<React.SetStateAction<boolean>>;
+  navState: string;
+  setNavState: React.Dispatch<React.SetStateAction<NavState>>;
 }
-export const TopNavBar: React.FC<props> = ({ setIsTopNavInView }) => {
+export const TopNavBar: React.FC<props> = ({ setNavState }) => {
   const { ref, isInView, entry } = useInView<HTMLDivElement>();
 
   useEffect(() => {
-    setIsTopNavInView(isInView);
+    if (isInView) setNavState("top");
+    else setNavState("side");
   }, [isInView]);
 
   return (
