@@ -49,29 +49,12 @@ $nav-height: 3em;
     text-decoration: none;
   }
 
-  // animation
-
   .overlay-nav-item-origin {
     display: block;
-    position: fixed;
 
     opacity: 1;
 
-    transition: all 1s;
-  }
-
-  .overlay-nav-item-origin-enter {
-    opacity: 1;
-  }
-
-  .overlay-nav-item-origin-enter-done {
-    opacity: 1;
-  }
-  .overlay-nav-item-origin-exit {
-    opacity: 0;
-  }
-  .overlay-nav-item-origin-exit-done {
-    opacity: 0;
+    transition: opacity 1s;
   }
 
   .overlay-nav-item-sec {
@@ -79,22 +62,10 @@ $nav-height: 3em;
     right: 2em;
     bottom: 2em;
 
-    opacity: 0;
+    opacity: 1;
 
-    transition: all 1s;
+    transition: opacity 1s;
     font-size: 2em;
     color: var(--color-main-assents);
-  }
-  .overlay-nav-item-sec-enter {
-    opacity: 1;
-  }
-  .overlay-nav-item-sec-enter-done {
-    opacity: 1;
-  }
-  .overlay-nav-item-sec-exit {
-    opacity: 0;
-  }
-  .overlay-nav-item-sec-exit-done {
-    opacity: 0;
   }
 }

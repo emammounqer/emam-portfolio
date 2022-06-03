@@ -12,7 +12,7 @@ export const NavBar = () => {
     <div>
       <TopNavBar navState={navState} setNavState={setNavState} />
       <SideNavBar navState={navState} setNavState={setNavState} />
-      {/* <OverlayNavBar /> */}
+      <OverlayNavBar navState={navState} />
     </div>
   );
 };

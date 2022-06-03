@@ -1,14 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
-import {
-  SwitchTransition,
-  CSSTransition,
-  Transition,
-} from "react-transition-group";
 import { useInView } from "../../hooks/useInView";
+import { FaFileCsv } from "react-icons/fa";
+import { motion, transform, Variants } from "framer-motion";
 
 import styles from "./TopNavBar.module.scss";
 import { NavState } from "./NavBar";
-import { FaFileCsv } from "react-icons/fa";
+
+const variants: Variants = { top: { opacity: 1 }, side: { opacity: 0 } };
 
 interface props {
   navState: NavState;
@@ -17,8 +15,6 @@ interface props {
 
 export const TopNavBar: React.FC<props> = ({ navState, setNavState }) => {
   const { ref, isInView, entry } = useInView<HTMLDivElement>();
-  const CvElemOriginRef = useRef<HTMLAnchorElement>(null!);
-  const CvElemSecRef = useRef<HTMLAnchorElement>(null!);
 
   useEffect(() => {
     if (isInView) setNavState("top");
@@ -47,50 +43,13 @@ export const TopNavBar: React.FC<props> = ({ navState, setNavState }) => {
           </li>
         </div>
         <div className={`${styles.secLinks}`}>
-          <li>
-            <CSSTransition
-              in={isInView}
-              timeout={500}
-              nodeRef={CvElemOriginRef}
-              classNames={{
-                enter: styles.overlayNavItemOriginEnter,
-                enterDone: styles.overlayNavItemOriginEnterDone,
-                exit: styles.overlayNavItemOriginExit,
-                exitDone: styles.overlayNavItemOriginExitDone,
-              }}
-              onExit={translateToElem(CvElemOriginRef, CvElemSecRef)}
-              onEnter={() => (CvElemOriginRef.current.style.transform = `none`)}
-            >
-              <a
-                ref={CvElemOriginRef}
-                href=""
-                className={styles.overlayNavItemOrigin}
-              >
+          {navState === "top" && (
+            <motion.li layout layoutId="CVNav" transition={{ duration: 0.5 }}>
+              <a href="" className={styles.overlayNavItemOrigin}>
                 &#60; Resume /&#62;
               </a>
-            </CSSTransition>
-            <CSSTransition
-              in={isInView === false}
-              timeout={500}
-              nodeRef={CvElemSecRef}
-              classNames={{
-                enter: styles.overlayNavItemSecEnter,
-                enterDone: styles.overlayNavItemSecEnterDone,
-                exit: styles.overlayNavItemSecExit,
-                exitDone: styles.overlayNavItemSecExitDone,
-              }}
-              onEnter={() => (CvElemSecRef.current.style.transform = `none`)}
-              onExit={translateToElem(CvElemSecRef, CvElemOriginRef)}
-            >
-              <a
-                ref={CvElemSecRef}
-                href=""
-                className={styles.overlayNavItemSec}
-              >
-                <FaFileCsv />
-              </a>
-            </CSSTransition>
-          </li>
+            </motion.li>
+          )}
         </div>
       </ul>
     </nav>
@@ -98,15 +57,3 @@ export const TopNavBar: React.FC<props> = ({ navState, setNavState }) => {
 };
 
 export default TopNavBar;
-
-function translateToElem(
-  fromElem: React.MutableRefObject<HTMLAnchorElement>,
-  toElem: React.MutableRefObject<HTMLAnchorElement>,
-): (() => void) | undefined {
-  return () => {
-    const translateX = toElem.current.offsetLeft - fromElem.current.offsetLeft;
-    const translateY = toElem.current.offsetTop - fromElem.current.offsetTop;
-
-    fromElem.current.style.transform = `translate(${translateX}px, ${translateY}px)`;
-  };
-}
