@@ -14,7 +14,11 @@ export function useInView<T extends HTMLElement>(
   const observer = new IntersectionObserver(callBack, opt);
 
   useEffect(() => {
-    observer.observe(ref.current);
+    const elem = ref.current;
+    observer.observe(elem);
+    return () => {
+      observer.unobserve(elem);
+    };
   });
 
   return { ref, isInView, entry };

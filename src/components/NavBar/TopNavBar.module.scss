@@ -48,50 +48,53 @@ $nav-height: 3em;
     color: inherit;
     text-decoration: none;
   }
-}
 
-// animation
+  // animation
 
-.overlay-Nav-Item-Origin {
-  position: relative;
-}
+  .overlay-nav-item-origin {
+    display: block;
+    position: fixed;
 
-.overlay-nav-item-origin-entering {
-  background-color: red;
-}
+    opacity: 1;
 
-.overlay-nav-item-origin-entered {
-  background-color: green;
-}
-.overlay-nav-item-origin-exiting {
-  background-color: red;
-}
-.overlay-nav-item-origin-exited {
-  background-color: green;
-}
-
-.overlay-nav-item-sec {
-  position: fixed;
-  background-color: green;
-  right: 2em;
-  bottom: 2em;
-  li {
-    font-size: 2em;
-
-    a {
-      color: var(--color-main-assents);
-    }
+    transition: all 1s;
   }
-}
-.overlay-nav-item-sec-entering {
-  background-color: red;
-}
-.overlay-nav-item-sec-entered {
-  background-color: green;
-}
-.overlay-nav-item-sec-exiting {
-  // background-color: red;
-}
-.overlay-nav-item-sec-exited {
-  // background-color: green;
+
+  .overlay-nav-item-origin-enter {
+    opacity: 1;
+  }
+
+  .overlay-nav-item-origin-enter-done {
+    opacity: 1;
+  }
+  .overlay-nav-item-origin-exit {
+    opacity: 0;
+  }
+  .overlay-nav-item-origin-exit-done {
+    opacity: 0;
+  }
+
+  .overlay-nav-item-sec {
+    position: fixed;
+    right: 2em;
+    bottom: 2em;
+
+    opacity: 0;
+
+    transition: all 1s;
+    font-size: 2em;
+    color: var(--color-main-assents);
+  }
+  .overlay-nav-item-sec-enter {
+    opacity: 1;
+  }
+  .overlay-nav-item-sec-enter-done {
+    opacity: 1;
+  }
+  .overlay-nav-item-sec-exit {
+    opacity: 0;
+  }
+  .overlay-nav-item-sec-exit-done {
+    opacity: 0;
+  }
 }
