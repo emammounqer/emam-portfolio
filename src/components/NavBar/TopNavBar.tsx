@@ -1,14 +1,23 @@
 import React, { useEffect, useRef, useState } from "react";
-import styles from "./TopNavBar.module.scss";
+import {
+  SwitchTransition,
+  CSSTransition,
+  Transition,
+} from "react-transition-group";
 import { useInView } from "../../hooks/useInView";
+
+import styles from "./TopNavBar.module.scss";
 import { NavState } from "./NavBar";
+import { FaFileCsv } from "react-icons/fa";
 
 interface props {
-  navState: string;
+  navState: NavState;
   setNavState: React.Dispatch<React.SetStateAction<NavState>>;
 }
-export const TopNavBar: React.FC<props> = ({ setNavState }) => {
+
+export const TopNavBar: React.FC<props> = ({ navState, setNavState }) => {
   const { ref, isInView, entry } = useInView<HTMLDivElement>();
+  const CvElemRef = useRef(null!);
 
   useEffect(() => {
     if (isInView) setNavState("top");
@@ -16,7 +25,12 @@ export const TopNavBar: React.FC<props> = ({ setNavState }) => {
   }, [isInView]);
 
   return (
-    <nav className={styles.container} ref={ref}>
+    <nav
+      className={`
+      ${styles.container} 
+      ${navState === "side" ? styles.hidden : ""}`}
+      ref={ref}
+    >
       <img src="./img/logo.svg" alt="logo" className={styles.logo} />
 
       <ul className={styles.navLinks} role="list">
@@ -31,10 +45,38 @@ export const TopNavBar: React.FC<props> = ({ setNavState }) => {
             <a href="">Contact</a>
           </li>
         </div>
-        <div className={styles.secLinks}>
-          <li>
-            <a href=""> Resume </a>
-          </li>
+        <div className={`${styles.secLinks}`}>
+          <Transition in={isInView} timeout={500} nodeRef={CvElemRef}>
+            {(state) => {
+              const State = state.charAt(0).toUpperCase() + state.slice(1);
+
+              return (
+                <li ref={CvElemRef}>
+                  <a
+                    href=""
+                    className={
+                      styles[`overlayNavItemOrigin${State}`] +
+                      " " +
+                      styles.overlayNavItemOrigin
+                    }
+                  >
+                    &#60; Resume /&#62; {state}
+                  </a>
+                  <a
+                    href=""
+                    className={
+                      styles[`overlayNavItemSec${State}`] +
+                      " " +
+                      styles.overlayNavItemSec
+                    }
+                  >
+                    <FaFileCsv />
+                    {state}
+                  </a>
+                </li>
+              );
+            }}
+          </Transition>
         </div>
       </ul>
     </nav>
