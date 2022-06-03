@@ -1,0 +1,18 @@
+<svg width="28" height="29" viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g style="mix-blend-mode:multiply">
+<ellipse cx="13.6032" cy="15.0297" rx="13.6032" ry="13.9703" fill="#555555"/>
+</g>
+<ellipse cx="14.3967" cy="13.9703" rx="13.6032" ry="13.9703" fill="#D9D9D9"/>
+<ellipse cx="14.3967" cy="13.9703" rx="13.6032" ry="13.9703" fill="url(#pattern0)"/>
+<ellipse cx="14.3967" cy="13.9703" rx="13.6032" ry="13.9703" fill="url(#paint0_radial_254_154)"/>
+<defs>
+<pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+<use xlink:href="#image0_254_154" transform="translate(0 -0.149151) scale(0.00277778)"/>
+</pattern>
+<radialGradient id="paint0_radial_254_154" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(19.8947 7.56724) rotate(130.833) scale(40.0056 39.8653)">
+<stop stop-color="#D9D9D9"/>
+<stop offset="1" stop-color="#374486" stop-opacity="0"/>
+</radialGradient>
+
+</defs>
+</svg>
