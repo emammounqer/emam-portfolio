@@ -40,8 +40,6 @@ html:focus-within {
 /* Set core body defaults */
 body {
   min-height: 100vh;
-  /* TODO: del */
-  min-height: 2000px;
 
   text-rendering: optimizeSpeed;
   line-height: 1.5;

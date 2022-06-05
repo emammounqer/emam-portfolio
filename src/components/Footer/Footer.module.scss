@@ -1,0 +1,21 @@
+.container {
+  position: relative;
+
+  p {
+    text-align: center;
+    opacity: 0.7;
+  }
+}
+
+.bgImg {
+  position: absolute;
+  bottom: 0;
+
+  width: 100vw;
+
+  z-index: -1;
+
+  img {
+    min-width: 100%;
+  }
+}

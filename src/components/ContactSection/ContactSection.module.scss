@@ -1,0 +1,33 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 12em;
+  margin-bottom: 12em;
+
+  h2 {
+    font-size: 2.5em;
+    font-weight: 700;
+    text-align: center;
+  }
+}
+
+.btn {
+  border: none;
+
+  padding-inline: 5em;
+  padding-block: 0.4em;
+
+  margin-top: 3em;
+
+  background: var(--color-main-assents);
+  box-shadow: 0px 4px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 61px;
+
+  font-weight: bold;
+  color: white;
+
+  cursor: pointer;
+}
