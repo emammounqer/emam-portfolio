@@ -1,35 +1,27 @@
+import { useEffect, useRef, useState } from "react";
+import { CSSTransition } from "react-transition-group";
 import { FaLinkedin, FaGithub, FaVoicemail } from "react-icons/fa";
-import { motion, transform, Variants } from "framer-motion";
+
 import styles from "./LandSection.module.scss";
 import { useInView } from "../../hooks/useInView";
-import { useEffect, useRef, useState } from "react";
 import { getTransformBetweenElems } from "../../helper/distanceBetweenElem";
 import { getCords } from "../../helper/getCords";
-
-const variant: Variants = {
-  land: { opacity: 1 },
-  overlay: { opacity: 0 },
-};
 
 export const LandSection = () => {
   const { ref, isInView } = useInView<HTMLParagraphElement>();
   const con1 = useRef<HTMLButtonElement>(null!);
   const con2 = useRef<HTMLLIElement>(null!);
-  // const li1 = useRef<HTMLLIElement>(null!);
-  // const li2 = useRef<HTMLLIElement>(null!);
-  // const gi1 = useRef<HTMLLIElement>(null!);
-  // const gi2 = useRef<HTMLLIElement>(null!);
+  const conContainer1 = useRef<HTMLDivElement>(null!);
+  const conContainer2 = useRef<HTMLDivElement>(null!);
 
   const [con1Transform, setCon1Transform] = useState({ x: 0, y: 0 });
-  // const [li1Transform, setLi1Transform] = useState({ x: 0, y: 0 });
-  // const [gi1Transform, setGi1Transform] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const handleTransform = (e: Event) => {
-      const cordCon2 = getCords(con2.current);
+      const cordConContainer2 = getCords(conContainer2.current);
 
-      const x = cordCon2.left - con1.current.offsetLeft;
-      const y = cordCon2.top - con1.current.offsetTop;
+      const x = cordConContainer2.left - conContainer1.current.offsetLeft;
+      const y = cordConContainer2.top - conContainer1.current.offsetTop;
 
       setCon1Transform({ x, y });
     };
@@ -43,19 +35,15 @@ export const LandSection = () => {
     };
   }, []);
 
-  // useEffect(() => {
-  //   if (li1.current && li2.current) {
-  //     const transformLi1 = getTransformBetweenElems(li1.current, li2.current);
-  //     setLi1Transform(transformLi1);
-  //   }
-  // }, [li1.current, li2.current]);
-
-  // useEffect(() => {
-  //   if (gi1.current && gi2.current) {
-  //     const transformGi1 = getTransformBetweenElems(gi1.current, gi2.current);
-  //     setGi1Transform(transformGi1);
-  //   }
-  // }, [gi1.current, gi2.current]);
+  useEffect(() => {
+    if (isInView) {
+      con1.current.style.transform = "";
+      con2.current.style.transform = `translate(${-con1Transform.x}px, ${-con1Transform.y}px)`;
+    } else {
+      con2.current.style.transform = "";
+      con1.current.style.transform = `translate(${con1Transform.x}px, ${con1Transform.y}px)`;
+    }
+  }, [isInView, con1Transform]);
 
   return (
     <div className={styles.container}>
@@ -65,36 +53,30 @@ export const LandSection = () => {
         THAT <span>LOOK ATTRACTIVE</span> AND <span>WORK EFFECTIVELY</span>
       </p>
 
-      <motion.button
-        ref={con1}
-        className={styles.btn}
-        animate={
-          isInView
-            ? {
-                x: 0,
-                y: 0,
-                scale: 1,
-                // opacity: 1,
-              }
-            : {
-                x: con1Transform.x - con1.current.offsetWidth,
-                y: con1Transform.y - con1.current.offsetHeight,
-                scale: 0.5,
-                pointerEvents: "none",
-                // opacity: 0,
-              }
-        }
-        transition={{ type: "tween" }}
-      >
-        CONTACT
-      </motion.button>
-
+      <div ref={conContainer1}>
+        <CSSTransition
+          nodeRef={con1}
+          in={isInView}
+          timeout={500}
+          appear={true}
+          classNames={{
+            enter: styles.btnEnter,
+            enterDone: styles.btnEnterDone,
+            exit: styles.btnExit,
+            exitDone: styles.btnExitDone,
+          }}
+        >
+          <button ref={con1} className={styles.btn}>
+            CONTACT
+          </button>
+        </CSSTransition>
+      </div>
       <ul className={styles.lists} role="list">
-        <motion.li>
+        <li>
           <a href="">
             <FaLinkedin />
           </a>
-        </motion.li>
+        </li>
         <li>
           <a href="">
             <FaGithub />
@@ -103,30 +85,26 @@ export const LandSection = () => {
       </ul>
 
       <ul className={`${styles.overlayContact}`} role="list">
-        <li ref={con2}>
-          <motion.div
-            role="button"
-            animate={
-              isInView
-                ? {
-                    x: -con1Transform.x,
-                    y: -con1Transform.y,
-                    scale: 2,
-                    // opacity: 0,
-                    pointerEvents: "none",
-                  }
-                : {
-                    x: 0,
-                    y: 0,
-                    scale: 1,
-                    // opacity: 1,
-                  }
-            }
-            transition={{ type: "tween" }}
+        <div ref={conContainer2}>
+          <CSSTransition
+            nodeRef={con2}
+            in={!isInView}
+            timeout={500}
+            appear={true}
+            classNames={{
+              enter: styles.btn2Enter,
+              enterDone: styles.btn2EnterDone,
+              exit: styles.btn2Exit,
+              exitDone: styles.btn2ExitDone,
+            }}
           >
-            <FaVoicemail />
-          </motion.div>
-        </li>
+            <li ref={con2}>
+              <div role="button">
+                <FaVoicemail />
+              </div>
+            </li>
+          </CSSTransition>
+        </div>
         <li>
           <a href="">
             <FaLinkedin />
