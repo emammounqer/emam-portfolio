@@ -15,7 +15,7 @@ export const WhatIUseSection = () => {
             <div className={styles.cellHeader}>
               <img
                 className={styles.icon}
-                src="public\icons\front-dev.svg"
+                src="\icons\front-dev.svg"
                 alt="front"
               />
               <h3>Front-End</h3>
