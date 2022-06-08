@@ -9,41 +9,19 @@ import { getCords } from "../../helper/getCords";
 
 export const LandSection = () => {
   const { ref, isInView } = useInView<HTMLParagraphElement>();
-  const con1 = useRef<HTMLButtonElement>(null!);
-  const con2 = useRef<HTMLLIElement>(null!);
-  const conContainer1 = useRef<HTMLDivElement>(null!);
-  const conContainer2 = useRef<HTMLDivElement>(null!);
-
-  const [con1Transform, setCon1Transform] = useState({ x: 0, y: 0 });
+  const ContactRef = useRef<HTMLButtonElement>(null!);
+  const ContactContainerRef = useRef<HTMLDivElement>(null!);
 
   useEffect(() => {
-    const handleTransform = (e: Event) => {
-      const cordConContainer2 = getCords(conContainer2.current);
+    const container = ContactContainerRef.current;
+    const rect = container.getBoundingClientRect();
 
-      const x = cordConContainer2.left - conContainer1.current.offsetLeft;
-      const y = cordConContainer2.top - conContainer1.current.offsetTop;
+    const xOffset = window.innerWidth - rect.x - rect.width;
+    container.style.setProperty("--transformX-contact", `${-xOffset}px`);
 
-      setCon1Transform({ x, y });
-    };
-
-    window.addEventListener("scroll", handleTransform);
-    window.addEventListener("resize", handleTransform);
-
-    return () => {
-      window.removeEventListener("scroll", handleTransform);
-      window.removeEventListener("resize", handleTransform);
-    };
+    const yOffset = window.innerHeight - rect.y - rect.height;
+    container.style.setProperty("--transformY-contact", `${yOffset}px`);
   }, []);
-
-  useEffect(() => {
-    if (isInView) {
-      con1.current.style.transform = "";
-      con2.current.style.transform = `translate(${-con1Transform.x}px, ${-con1Transform.y}px)`;
-    } else {
-      con2.current.style.transform = "";
-      con1.current.style.transform = `translate(${con1Transform.x}px, ${con1Transform.y}px)`;
-    }
-  }, [isInView, con1Transform]);
 
   return (
     <div className={styles.container}>
@@ -53,11 +31,11 @@ export const LandSection = () => {
         THAT <span>LOOK ATTRACTIVE</span> AND <span>WORK EFFECTIVELY</span>
       </p>
 
-      <div ref={conContainer1}>
+      <div className={`${styles.btnContainer}`} ref={ContactContainerRef}>
         <CSSTransition
-          nodeRef={con1}
+          nodeRef={ContactRef}
           in={isInView}
-          timeout={500}
+          timeout={0}
           appear={true}
           classNames={{
             enter: styles.btnEnter,
@@ -66,45 +44,12 @@ export const LandSection = () => {
             exitDone: styles.btnExitDone,
           }}
         >
-          <button ref={con1} className={styles.btn}>
+          <button ref={ContactRef} className={styles.btn}>
             CONTACT
           </button>
         </CSSTransition>
       </div>
       <ul className={styles.lists} role="list">
-        <li>
-          <a href="">
-            <FaLinkedin />
-          </a>
-        </li>
-        <li>
-          <a href="">
-            <FaGithub />
-          </a>
-        </li>
-      </ul>
-
-      <ul className={`${styles.overlayContact}`} role="list">
-        <div ref={conContainer2}>
-          <CSSTransition
-            nodeRef={con2}
-            in={!isInView}
-            timeout={500}
-            appear={true}
-            classNames={{
-              enter: styles.btn2Enter,
-              enterDone: styles.btn2EnterDone,
-              exit: styles.btn2Exit,
-              exitDone: styles.btn2ExitDone,
-            }}
-          >
-            <li ref={con2}>
-              <div role="button">
-                <FaVoicemail />
-              </div>
-            </li>
-          </CSSTransition>
-        </div>
         <li>
           <a href="">
             <FaLinkedin />
