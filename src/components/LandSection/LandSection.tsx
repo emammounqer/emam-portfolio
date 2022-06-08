@@ -1,28 +1,11 @@
-import { useEffect, useMemo, useRef, useState } from "react";
-import { CSSTransition } from "react-transition-group";
 import { FaLinkedin, FaGithub, FaVoicemail } from "react-icons/fa";
 
 import styles from "./LandSection.module.scss";
 import { useInView } from "../../hooks/useInView";
-import { getTransformBetweenElems } from "../../helper/distanceBetweenElem";
-import { getCords } from "../../helper/getCords";
+import { StaticToFixed } from "../StaticToFixed";
 
 export const LandSection = () => {
-  const { ref, isInView } = useInView<HTMLParagraphElement>();
-  const ContactRef = useRef<HTMLButtonElement>(null!);
-  const ContactContainerRef = useRef<HTMLDivElement>(null!);
-
-  useEffect(() => {
-    const container = ContactContainerRef.current;
-    const rect = container.getBoundingClientRect();
-
-    /** this is offset of elem to the elem if it was bottom right */
-    const xOffset = window.innerWidth - rect.x - rect.width;
-    const yOffset = window.innerHeight - rect.y - rect.height;
-
-    container.style.setProperty("--transformX-contact", `${-xOffset}px`);
-    container.style.setProperty("--transformY-contact", `${yOffset}px`);
-  }, [isInView]);
+  const { ref, isInView } = useInView<HTMLParagraphElement>({ threshold: 1 });
 
   return (
     <div className={styles.container}>
@@ -32,30 +15,31 @@ export const LandSection = () => {
         THAT <span>LOOK ATTRACTIVE</span> AND <span>WORK EFFECTIVELY</span>
       </p>
 
-      <div className={`${styles.btnContainer}`} ref={ContactContainerRef}>
-        <CSSTransition
-          nodeRef={ContactRef}
-          in={isInView}
-          timeout={0}
-          appear={true}
-          classNames={{
-            enter: styles.btnEnter,
-            enterDone: styles.btnEnterDone,
-            exit: styles.btnExit,
-            exitDone: styles.btnExitDone,
-          }}
-        >
-          <button ref={ContactRef} className={styles.btn}>
-            CONTACT
-          </button>
-        </CSSTransition>
-      </div>
+      <StaticToFixed
+        ref={ref}
+        inTransition={isInView}
+        styles={styles}
+        classes="btn"
+        height="36.8px"
+        width="233.167px"
+      >
+        <button className={styles.btn}>CONTACT</button>
+      </StaticToFixed>
+
       <ul className={styles.lists} role="list">
-        <li>
-          <a href="">
-            <FaLinkedin />
-          </a>
-        </li>
+        <StaticToFixed
+          inTransition={isInView}
+          classes="bottom-right"
+          height="5em"
+          width="5em"
+        >
+          <li>
+            <a href="">
+              <FaLinkedin />
+            </a>
+          </li>
+        </StaticToFixed>
+
         <li>
           <a href="">
             <FaGithub />

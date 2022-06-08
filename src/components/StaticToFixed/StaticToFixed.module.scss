@@ -1,0 +1,26 @@
+.bottom-right {
+  &-enter {
+    transform: translate(calc(-1 * var(--transformX-contact) - 2em), calc(var(--transformY-contact) - 2em));
+  }
+
+  &-enter-done {
+    transform: translate(0, 0);
+
+    transition: transform 0.5s;
+  }
+
+  &-exit {
+    position: fixed;
+    right: 2em;
+    bottom: 2em;
+    transform: translate(calc(var(--transformX-contact) + 2em), calc(-1 * var(--transformY-contact) + 2em));
+  }
+  &-exit-done {
+    position: fixed;
+    right: 2em;
+    bottom: 2em;
+    transition: transform 0.5s;
+
+    transform: translate(0, 0);
+  }
+}

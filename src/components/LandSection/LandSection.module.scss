@@ -32,13 +32,6 @@
   }
 }
 
-.btn-container {
-  --transformX-contact: 0px;
-  --transformY-contact: 0px;
-
-  height: 36.8px;
-  width: 233.167px;
-}
 .btn {
   border: none;
   position: relative;
@@ -80,9 +73,6 @@
     transition: transform 0.5s;
 
     transform: translate(0, 0);
-
-    // bottom: 1em;
-    // right: 1em;
   }
 }
 
