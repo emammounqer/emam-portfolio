@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { CSSTransition } from "react-transition-group";
 import { FaLinkedin, FaGithub, FaVoicemail } from "react-icons/fa";
 
@@ -16,12 +16,13 @@ export const LandSection = () => {
     const container = ContactContainerRef.current;
     const rect = container.getBoundingClientRect();
 
+    /** this is offset of elem to the elem if it was bottom right */
     const xOffset = window.innerWidth - rect.x - rect.width;
-    container.style.setProperty("--transformX-contact", `${-xOffset}px`);
-
     const yOffset = window.innerHeight - rect.y - rect.height;
+
+    container.style.setProperty("--transformX-contact", `${-xOffset}px`);
     container.style.setProperty("--transformY-contact", `${yOffset}px`);
-  }, []);
+  }, [isInView]);
 
   return (
     <div className={styles.container}>

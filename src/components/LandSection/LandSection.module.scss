@@ -71,7 +71,7 @@
     position: fixed;
     right: 2em;
     bottom: 2em;
-    transform: translate(calc(var(--transformX-contact) + 2em), calc(-1 * var(--transformY-contact) - 2em));
+    transform: translate(calc(var(--transformX-contact) + 2em), calc(-1 * var(--transformY-contact) + 2em));
   }
   &-exit-done {
     position: fixed;
