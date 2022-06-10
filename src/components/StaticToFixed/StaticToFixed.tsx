@@ -9,35 +9,49 @@ interface props {
   classes: string;
   height: string;
   width: string;
+  right?: string;
+  bottom?: string;
 }
 
 // TODO: add properties top, bottom, left and right to the component
 export const StaticToFixed = forwardRef<HTMLDivElement, props>(
   (
-    { styles = inStyles, inTransition, children, classes, height, width },
+    {
+      styles = inStyles,
+      inTransition,
+      children,
+      classes,
+      height,
+      width,
+      bottom,
+      right,
+    },
     ref,
   ) => {
-    const ContactRef = useRef<HTMLDivElement>(null!);
-    const ContactContainerRef = useRef<HTMLDivElement>(null!);
+    const elemRef = useRef<HTMLDivElement>(null!);
+    const elemContainerRef = useRef<HTMLDivElement>(null!);
 
     useEffect(() => {
-      const container = ContactContainerRef.current;
+      const container = elemContainerRef.current;
       const rect = container.getBoundingClientRect();
 
       /** this is offset of elem to the elem if it was bottom right */
       const xOffset = window.innerWidth - rect.x - rect.width;
       const yOffset = window.innerHeight - rect.y - rect.height;
 
-      container.style.setProperty("--transformX-contact", `${-xOffset}px`);
-      container.style.setProperty("--transformY-contact", `${yOffset}px`);
+      container.style.setProperty("--transformX-elem", `${-xOffset}px`);
+      container.style.setProperty("--transformY-elem", `${yOffset}px`);
+      if (right) container.style.setProperty("--right", `${right}`);
+      if (bottom) container.style.setProperty("--bottom", `${bottom}`);
     }, [inTransition]);
 
     return (
       <div
+        className={`${inStyles.staticToFixedContainer}`}
         style={{ height, width, position: "relative", zIndex: 1000 }}
         ref={(node) => {
           if (node === null) return;
-          ContactContainerRef.current = node;
+          elemContainerRef.current = node;
           if (typeof ref === "function") {
             ref(node);
           } else if (ref) {
@@ -46,7 +60,7 @@ export const StaticToFixed = forwardRef<HTMLDivElement, props>(
         }}
       >
         <CSSTransition
-          nodeRef={ContactRef}
+          nodeRef={elemRef}
           in={inTransition}
           timeout={0}
           classNames={{
@@ -56,7 +70,7 @@ export const StaticToFixed = forwardRef<HTMLDivElement, props>(
             exitDone: styles[`${classes}-exit-done`],
           }}
         >
-          <div ref={ContactRef}>{children}</div>
+          <div ref={elemRef}>{children}</div>
         </CSSTransition>
       </div>
     );

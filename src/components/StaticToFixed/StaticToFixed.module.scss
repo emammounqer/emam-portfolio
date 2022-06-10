@@ -1,6 +1,17 @@
+.static-to-fixed-container {
+  --bottom: 2em;
+  --right: 2em;
+
+  display: grid;
+  place-items: center;
+}
+
 .bottom-right {
   &-enter {
-    transform: translate(calc(-1 * var(--transformX-contact) - 2em), calc(var(--transformY-contact) - 2em));
+    transform: translate(
+      calc(-1 * var(--transformX-elem) - var(--right)),
+      calc(var(--transformY-elem) - var(--bottom))
+    );
   }
 
   &-enter-done {
@@ -11,14 +22,17 @@
 
   &-exit {
     position: fixed;
-    right: 2em;
-    bottom: 2em;
-    transform: translate(calc(var(--transformX-contact) + 2em), calc(-1 * var(--transformY-contact) + 2em));
+    right: var(--right);
+    bottom: var(--bottom);
+    transform: translate(
+      calc(var(--transformX-elem) + var(--right)),
+      calc(-1 * var(--transformY-elem) + var(--bottom))
+    );
   }
   &-exit-done {
     position: fixed;
-    right: 2em;
-    bottom: 2em;
+    right: var(--right);
+    bottom: var(--bottom);
     transition: transform 0.5s;
 
     transform: translate(0, 0);

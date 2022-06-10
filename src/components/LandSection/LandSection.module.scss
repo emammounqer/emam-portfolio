@@ -1,4 +1,4 @@
-.container {
+.land-section-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -32,9 +32,12 @@
   }
 }
 
-.btn {
+.contact1 {
+  display: block;
   border: none;
   position: relative;
+
+  text-decoration: none;
 
   padding-inline: 5em;
   padding-block: 0.4em;
@@ -46,33 +49,66 @@
   font-weight: bold;
   color: white;
 
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+
   z-index: 100;
 
   cursor: pointer;
+}
+.contact2 {
+  position: absolute;
+  font-size: 2em;
+  top: 0;
+  right: 0;
+  color: var(--color-main-assents);
+  opacity: 0;
+
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+
+  cursor: pointer;
+}
+
+.contact-animation {
+  $right: 2em;
+  $bottom: 13em;
 
   &-enter {
-    transform: translate(calc(-1 * var(--transformX-contact) - 2em), calc(var(--transformY-contact) - 2em));
+    transform: translate(calc(-1 * var(--transformX-elem) - $right), calc(var(--transformY-elem) - $bottom));
   }
 
   &-enter-done {
     transform: translate(0, 0);
-
     transition: transform 0.5s;
   }
 
   &-exit {
     position: fixed;
-    right: 2em;
-    bottom: 2em;
-    transform: translate(calc(var(--transformX-contact) + 2em), calc(-1 * var(--transformY-contact) + 2em));
+    right: $right;
+    bottom: $bottom;
+    transform: translate(calc(var(--transformX-elem) + $right), calc(-1 * var(--transformY-elem) + $bottom));
+    .contact1 {
+      opacity: 0;
+      transform-origin: right;
+      transform: scaleX(0);
+    }
+    .contact2 {
+      opacity: 1;
+    }
   }
   &-exit-done {
     position: fixed;
-    right: 2em;
-    bottom: 2em;
+    right: $right;
+    bottom: $bottom;
     transition: transform 0.5s;
-
     transform: translate(0, 0);
+    .contact1 {
+      opacity: 0;
+      transform-origin: right;
+      transform: scaleX(0);
+    }
+    .contact2 {
+      opacity: 1;
+    }
   }
 }
 
