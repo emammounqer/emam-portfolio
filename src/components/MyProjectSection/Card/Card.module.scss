@@ -56,6 +56,14 @@
   margin-bottom: 1em;
 
   font-size: 1.7rem;
+  .github-link {
+    display: inline-block;
+    margin-inline-end: 1em;
+
+    color: var(--color-main-assents);
+
+    transform: translateY(0.1em);
+  }
 }
 
 .card-about-container {
@@ -89,5 +97,18 @@
     position: absolute;
     top: -0.5em;
     z-index: 20;
+  }
+}
+
+.used-teq-container {
+  display: flex;
+  gap: 1em;
+
+  justify-content: end;
+
+  padding-top: 3em;
+
+  & > * {
+    font-size: 2em;
   }
 }

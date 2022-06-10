@@ -2,17 +2,24 @@ import React from "react";
 import styles from "./Card.module.scss";
 
 import project1Img from "./../../../assets/img/project-1-1.png";
+import { FaGithub } from "react-icons/fa";
 
 interface props {
   dire?: "Left" | "Right";
+  usedTeq: React.ReactNode;
 }
 
-export const Card: React.FC<props> = ({ dire = "Left" }) => {
+export const Card: React.FC<props> = ({ dire = "Left", usedTeq }) => {
   return (
     <div className={`${styles.projectCard} ${styles[`projectCard${dire}`]}`}>
       <img src={project1Img} alt="project1Img" />
       <div className={`${styles.cardInfo}`}>
-        <h3 className={styles.cardHeader}>Linking Pages</h3>
+        <h3 className={styles.cardHeader}>
+          <a className={`${styles.githubLink}`} href="">
+            <FaGithub />
+          </a>
+          Linking Pages
+        </h3>
         <div className={styles.cardAboutContainer}>
           <svg
             width="20"
@@ -31,6 +38,7 @@ export const Card: React.FC<props> = ({ dire = "Left" }) => {
             vulputate libero et velit interdum, ac aliquet odio mattis.
           </p>
         </div>
+        <div className={`${styles.usedTeqContainer}`}>{usedTeq}</div>
       </div>
     </div>
   );
