@@ -78,7 +78,7 @@
     height: 8em;
   }
 
-  &::after {
+  & .after {
     content: "";
     display: block;
     background-color: var(--color-main-assents);
