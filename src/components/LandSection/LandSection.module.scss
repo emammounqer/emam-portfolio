@@ -11,7 +11,11 @@
   background: linear-gradient(66.27deg, #2f6690 1.25%, #3c5098 71.06%, #2f6690 88.52%);
   color: white;
 
-  img {
+  > * {
+    z-index: 10;
+  }
+
+  > img {
     width: 13em;
     padding: 1em;
   }
@@ -159,4 +163,32 @@
   a {
     color: inherit;
   }
+}
+
+.icons-container {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  z-index: 1;
+
+  margin: 4em;
+
+  mix-blend-mode: multiply;
+  opacity: 0.26;
+  filter: blur(3px);
+}
+
+.transition-container {
+  > * {
+    transition: transform 33s ease-in-out;
+  }
+}
+.icon {
+  position: absolute;
+  height: 2em;
+  aspect-ratio: 1;
 }
