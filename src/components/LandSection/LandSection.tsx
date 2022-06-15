@@ -4,7 +4,11 @@ import styles from "./LandSection.module.scss";
 import { useInView } from "../../hooks/useInView";
 import { StaticToFixed } from "../StaticToFixed";
 
-export const LandSection = () => {
+interface props {
+  openContactForm: () => void;
+}
+
+export const LandSection: React.FC<props> = ({ openContactForm }) => {
   const { ref, isInView } = useInView<HTMLParagraphElement>({ threshold: 1 });
 
   return (
@@ -23,12 +27,12 @@ export const LandSection = () => {
         height="36.8px"
         width="233.167px"
       >
-        <a href="" className={styles.contact1}>
+        <button className={styles.contact1} onClick={openContactForm}>
           CONTACT
-        </a>
-        <a href="" className={`${styles.contact2}`}>
+        </button>
+        <button className={`${styles.contact2}`} onClick={openContactForm}>
           <FaMailBulk />
-        </a>
+        </button>
       </StaticToFixed>
 
       <ul className={styles.lists} role="list">

@@ -55,7 +55,11 @@
 
   cursor: pointer;
 }
+
 .contact2 {
+  appearance: none;
+  border: none;
+  background-color: transparent;
   position: absolute;
   font-size: 2em;
   top: 0;
