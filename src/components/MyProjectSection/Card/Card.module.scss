@@ -1,3 +1,5 @@
+@use "src/styles/variables";
+
 .project-card {
   position: relative;
 
@@ -111,4 +113,20 @@
   & > * {
     font-size: 2em;
   }
+}
+
+@media (max-width: variables.$bp-sm) {
+  .project-card {
+    font-size: 0.4rem;
+  }
+}
+@media (min-width: variables.$bp-sm) {
+}
+@media (min-width: variables.$bp-md) {
+}
+@media (min-width: variables.$bp-lg) {
+}
+@media (min-width: variables.$bp-xl) {
+}
+@media (min-width: variables.$bp-xxl) {
 }

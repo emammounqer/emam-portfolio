@@ -1,3 +1,5 @@
+@use "src/styles/variables";
+
 .land-section-container {
   display: flex;
   flex-direction: column;
@@ -7,6 +9,9 @@
   height: max(100vh, 500px);
 
   padding-top: 3em;
+
+  margin-inline: auto;
+  width: 100%;
 
   background: linear-gradient(66.27deg, #2f6690 1.25%, #3c5098 71.06%, #2f6690 88.52%);
   color: white;
@@ -23,11 +28,14 @@
   h1 {
     font-size: 2.6em;
     margin-bottom: 1rem;
+
+    text-align: center;
   }
 
   P {
     font-size: 1.5em;
     margin-bottom: 3em;
+    text-align: center;
   }
 
   span {
@@ -135,7 +143,7 @@
   }
 
   a {
-    font-size: 2.2rem;
+    font-size: 2.2em;
 
     color: var(--color-main-assents);
   }
@@ -187,8 +195,42 @@
     transition: transform 33s ease-in-out;
   }
 }
+
 .icon {
   position: absolute;
   height: 2em;
   aspect-ratio: 1;
+}
+
+@media (max-width: variables.$bp-sm) {
+  .land-section-container {
+    font-size: 0.7rem;
+
+    > img {
+      width: 20em;
+      padding: 1em;
+    }
+  }
+}
+// @media (min-width: variables.$bp-sm) {
+//   .land-section-container {
+//   }
+// }
+// @media (min-width: variables.$bp-md) {
+//   .land-section-container {
+//   }
+// }
+// @media (min-width: variables.$bp-lg) {
+//   .land-section-container {
+//   }
+// }
+@media (min-width: variables.$bp-xl) {
+  .land-section-container {
+    font-size: 1.2rem;
+  }
+}
+@media (min-width: variables.$bp-xxl) {
+  .land-section-container {
+    font-size: 2rem;
+  }
 }

@@ -14,20 +14,9 @@ interface props {
 }
 
 // TODO: add properties top, bottom, left and right to the component
+// TODO: instead of using inline styles for height and width, use css modules
 export const StaticToFixed = forwardRef<HTMLDivElement, props>(
-  (
-    {
-      styles = inStyles,
-      inTransition,
-      children,
-      classes,
-      height,
-      width,
-      bottom,
-      right,
-    },
-    ref,
-  ) => {
+  ({ styles = inStyles, inTransition, children, classes, height, width, bottom, right }, ref) => {
     const elemRef = useRef<HTMLDivElement>(null!);
     const elemContainerRef = useRef<HTMLDivElement>(null!);
 

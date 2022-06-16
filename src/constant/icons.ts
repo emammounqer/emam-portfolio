@@ -14,6 +14,7 @@ import javascript from "../assets/img/icons/javascript.svg";
 import mongodb from "../assets/img/icons/mongodb.svg";
 import mysql from "../assets/img/icons/mysql.svg";
 import nodejs from "../assets/img/icons/nodejs.svg";
+import rest_api from "../assets/img/icons/rest_api.svg";
 
 import git from "../assets/img/icons/Git.svg";
 import github from "../assets/img/icons/GitHub.svg";
@@ -31,15 +32,16 @@ const ICONS = {
     webpack,
     html_5,
     react,
+    javascript,
   },
 
   back: {
     back_dev,
     express,
-    javascript,
     mongodb,
     mysql,
     nodejs,
+    rest_api,
   },
 
   other: {

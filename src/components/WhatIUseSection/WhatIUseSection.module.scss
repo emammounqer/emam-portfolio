@@ -1,5 +1,41 @@
+@use "src/styles/variables";
+
 .container {
-  padding-inline: 12em;
+  font-size: 0.7rem;
+  margin-inline: auto;
+  width: 100%;
+}
+@media (min-width: variables.$bp-sm) {
+  .container {
+    max-width: variables.$bp-sm;
+  }
+}
+@media (min-width: variables.$bp-md) {
+  .container {
+    max-width: variables.$bp-md;
+  }
+}
+@media (min-width: variables.$bp-lg) {
+  .container {
+    font-size: 1rem;
+
+    max-width: variables.$bp-lg;
+    padding-inline: 10em;
+  }
+}
+@media (min-width: variables.$bp-xl) {
+  .container {
+    font-size: 1.2rem;
+
+    max-width: variables.$bp-xl;
+  }
+}
+@media (min-width: variables.$bp-xxl) {
+  .container {
+    font-size: 1.4rem;
+
+    max-width: variables.$bp-xxl;
+  }
 }
 
 .content {

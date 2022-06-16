@@ -50,7 +50,7 @@ export const LandSection: React.FC<props> = ({ openContactForm }) => {
   };
 
   return (
-    <div className={styles.landSectionContainer}>
+    <section className={styles.landSectionContainer}>
       <img src="./img/logo.svg" alt="logo" />
       <h1>BUILD INTERACTIVE WEBSITE </h1>
       <p className={styles.textSec} ref={ref}>
@@ -62,8 +62,8 @@ export const LandSection: React.FC<props> = ({ openContactForm }) => {
         inTransition={isInView}
         styles={styles}
         classes="contact-animation"
-        height="36.8px"
-        width="233.167px"
+        height="1.675em"
+        width="14.5em"
       >
         <button className={styles.contact1} onClick={openContactForm}>
           CONTACT
@@ -81,7 +81,7 @@ export const LandSection: React.FC<props> = ({ openContactForm }) => {
           width="5em"
           bottom="6em"
         >
-          <li>
+          <li className={`${styles.linkIcon}`}>
             <a href="https://www.linkedin.com/in/emam-almounqer" target="anagreh-linkedin">
               <FaLinkedin />
             </a>
@@ -94,7 +94,7 @@ export const LandSection: React.FC<props> = ({ openContactForm }) => {
           width="5em"
           bottom="9em"
         >
-          <li>
+          <li className={`${styles.linkIcon}`}>
             <a href="https://github.com/anagreh" target="anagreh-github">
               <FaGithub />
             </a>
@@ -114,7 +114,7 @@ export const LandSection: React.FC<props> = ({ openContactForm }) => {
           />
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 

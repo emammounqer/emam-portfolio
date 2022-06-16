@@ -1,10 +1,38 @@
+@use "src/styles/variables";
 .container {
-  padding-inline: 12em;
+  margin-inline: auto;
 
   h2 {
     text-align: center;
     font-size: 2.3rem;
 
     margin-block: 1em;
+  }
+}
+
+@media (min-width: variables.$bp-sm) {
+  .container {
+    max-width: variables.$bp-sm;
+  }
+}
+@media (min-width: variables.$bp-md) {
+  .container {
+    max-width: variables.$bp-md;
+  }
+}
+@media (min-width: variables.$bp-lg) {
+  .container {
+    max-width: variables.$bp-lg;
+    padding-inline: 12em;
+  }
+}
+@media (min-width: variables.$bp-xl) {
+  .container {
+    max-width: variables.$bp-xl;
+  }
+}
+@media (min-width: variables.$bp-xxl) {
+  .container {
+    max-width: variables.$bp-xxl;
   }
 }
