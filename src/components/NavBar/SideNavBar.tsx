@@ -8,16 +8,8 @@ interface props {
 }
 
 export const SideNavBar: React.FC<props> = ({ navState }) => {
-  useEffect(() => {
-    if (navState === "side") {
-    }
-  }, [navState]);
   return (
-    <nav
-      className={`${styles.container} ${
-        navState === "side" ? styles.containerActive : ""
-      }`}
-    >
+    <nav className={`${styles.container} ${navState === "side" ? styles.containerActive : ""}`}>
       <ul className={styles.navLinks} role="list">
         <li>
           <a href="">Home</a>
