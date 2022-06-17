@@ -2,13 +2,11 @@
 
 .project-card {
   position: relative;
+  display: flex;
+  align-items: center;
 
   min-height: 24em;
   margin-bottom: 4em;
-
-  img {
-    max-height: 100%;
-  }
 }
 
 .project-card-left {
@@ -105,6 +103,7 @@
 .used-teq-container {
   display: flex;
   gap: 1em;
+  padding-inline: 1em;
 
   justify-content: end;
 
@@ -116,6 +115,10 @@
 }
 
 @media (max-width: variables.$bp-sm) {
+  .project-card {
+    flex-direction: column;
+  }
+
   .project-card-left {
     direction: rtl;
     left: 0;
@@ -174,8 +177,18 @@
   }
 }
 @media (min-width: variables.$bp-sm) {
+  .img-container {
+    img {
+      width: 80%;
+    }
+  }
 }
 @media (min-width: variables.$bp-md) {
+  .img-container {
+    img {
+      width: auto;
+    }
+  }
 }
 @media (min-width: variables.$bp-lg) {
 }

@@ -50,7 +50,9 @@ export const Card: React.FC<props> = ({ dire = "Left", usedTeq }) => {
       viewport={{ amount: 0.3 }}
       initial={{ opacity: 0.3 }}
     >
-      <img src={project1Img} alt="project1Img" />
+      <div className={`${styles.imgContainer}`}>
+        <img src={project1Img} alt="project1Img" />
+      </div>
       <div className={`${styles.cardInfo}`}>
         <h3 className={styles.cardHeader}>
           <a className={`${styles.githubLink}`} href="">

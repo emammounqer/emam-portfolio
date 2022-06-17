@@ -13,23 +13,18 @@
 
 @media (min-width: variables.$bp-sm) {
   .container {
-    max-width: variables.$bp-sm;
-  }
-}
-@media (min-width: variables.$bp-md) {
-  .container {
-    max-width: variables.$bp-md;
+    padding-inline: 2em;
   }
 }
 @media (min-width: variables.$bp-lg) {
   .container {
-    max-width: variables.$bp-lg;
-    padding-inline: 12em;
+    padding-inline: 4em;
   }
 }
 @media (min-width: variables.$bp-xl) {
   .container {
     max-width: variables.$bp-xl;
+    padding-inline: 12em;
   }
 }
 @media (min-width: variables.$bp-xxl) {
