@@ -1,4 +1,6 @@
 import React, { forwardRef, useEffect } from "react";
+import { Link } from "react-scroll";
+import { navLinks } from "../../constant/navLinks";
 import { NavState } from "./NavBar";
 import styles from "./SideNavBar.module.scss";
 
@@ -11,15 +13,18 @@ export const SideNavBar: React.FC<props> = ({ navState }) => {
   return (
     <nav className={`${styles.container} ${navState === "side" ? styles.containerActive : ""}`}>
       <ul className={styles.navLinks} role="list">
-        <li>
-          <a href="">Home</a>
-        </li>
-        <li>
-          <a href="">Project</a>
-        </li>
-        <li>
-          <a href="">Contact</a>
-        </li>
+        {navLinks.selfLinks.map((link) => (
+          <li>
+            <Link className={`${styles.scrollLink}`} to={link.link} smooth={true}>
+              {link.title}
+            </Link>
+          </li>
+        ))}
+        {navLinks.outerLinks.map((link) => (
+          <li>
+            <a href={link.link}>&#60; {link.title} /&#62;</a>
+          </li>
+        ))}
       </ul>
     </nav>
   );

@@ -1,8 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
+import { Link } from "react-scroll";
 import { useInView } from "../../hooks/useInView";
 
 import styles from "./TopNavBar.module.scss";
 import { NavState } from "./NavBar";
+
+import { navLinks } from "../../constant/navLinks";
 
 interface props {
   navState: NavState;
@@ -28,20 +31,26 @@ export const TopNavBar: React.FC<props> = ({ navState, setNavState }) => {
 
       <ul className={styles.navLinks} role="list">
         <div className={styles.links}>
-          <li>
-            <a href="">Home</a>
-          </li>
-          <li>
-            <a href="">Project</a>
-          </li>
-          <li>
-            <a href="">Contact</a>
-          </li>
+          {navLinks.selfLinks.map((link) => (
+            <li>
+              <Link
+                className={`${styles.scrollLink} ${
+                  link.title === "Home" ? styles.linkSelected : ""
+                }`}
+                to={link.link}
+                smooth={true}
+              >
+                {link.title}
+              </Link>
+            </li>
+          ))}
         </div>
         <div className={`${styles.secLinks}`}>
-          <li>
-            <a href="">&#60; Resume /&#62;</a>
-          </li>
+          {navLinks.outerLinks.map((link) => (
+            <li>
+              <a href={link.link}>&#60; {link.title} /&#62;</a>
+            </li>
+          ))}
         </div>
       </ul>
     </nav>

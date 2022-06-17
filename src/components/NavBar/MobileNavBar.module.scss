@@ -62,6 +62,9 @@
   overflow: hidden;
 }
 
+.scroll-link {
+  cursor: pointer;
+}
 @media (min-width: variables.$bp-sm) {
   .container {
     display: none;

@@ -59,6 +59,15 @@ $nav-height: 3em;
   }
 }
 
+.scroll-link {
+  cursor: pointer;
+}
+
+.link-selected {
+  filter: opacity(0.5);
+  cursor: default;
+}
+
 @media (min-width: variables.$bp-sm) {
   .nav-links {
     display: flex;

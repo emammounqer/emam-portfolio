@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-scroll";
+import { navLinks } from "../../constant/navLinks";
 import styles from "./MobileNavBar.module.scss";
 
 type Props = {};
@@ -6,10 +8,10 @@ type Props = {};
 export const MobileNavBar = (props: Props) => {
   const [active, setActive] = useState(false);
 
+  const unActivate = () => {
+    setActive(false);
+  };
   useEffect(() => {
-    const unActivate = () => {
-      setActive(false);
-    };
     window.addEventListener("resize", unActivate);
 
     return () => window.removeEventListener("resize", unActivate);
@@ -34,21 +36,25 @@ export const MobileNavBar = (props: Props) => {
       <ul className={`${styles.navList} ${active ? styles.expanded : ""}`}>
         <img src="/img/Logo.svg" alt="" className={`${styles.logo}`} />
 
-        <li>
-          <a href="" className={`${styles.navLink}`}>
-            Home
-          </a>
-        </li>
-        <li>
-          <a href="" className={`${styles.navLink}`}>
-            Project
-          </a>
-        </li>
-        <li>
-          <a href="" className={`${styles.navLink}`}>
-            Contact
-          </a>
-        </li>
+        {navLinks.selfLinks.map((link) => (
+          <li>
+            <Link
+              className={`${styles.scrollLink} ${styles.navLink}`}
+              to={link.link}
+              smooth={true}
+              onClick={unActivate}
+            >
+              {link.title}
+            </Link>
+          </li>
+        ))}
+        {navLinks.outerLinks.map((link) => (
+          <li>
+            <a className={`${styles.navLink}`} href={link.link}>
+              &#60; {link.title} /&#62;
+            </a>
+          </li>
+        ))}
       </ul>
     </div>
   );

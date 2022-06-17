@@ -65,6 +65,10 @@
   }
 }
 
+.scroll-link {
+  cursor: pointer;
+}
+
 @media (max-width: variables.$bp-sm) {
   .container {
     display: none;
