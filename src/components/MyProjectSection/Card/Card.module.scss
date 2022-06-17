@@ -3,7 +3,7 @@
 .project-card {
   position: relative;
 
-  height: 24em;
+  min-height: 24em;
   margin-bottom: 4em;
 
   img {
@@ -77,7 +77,7 @@
     background-color: var(--color-main-sec);
     padding-block: 2em;
     padding-inline: 0.5em;
-    height: 8em;
+    min-height: 8em;
   }
 
   & .after {
@@ -116,8 +116,61 @@
 }
 
 @media (max-width: variables.$bp-sm) {
-  .project-card {
-    font-size: 0.4rem;
+  .project-card-left {
+    direction: rtl;
+    left: 0;
+
+    .card-info {
+      left: 0;
+
+      & > * {
+        text-align: left;
+      }
+    }
+
+    .card-about-container {
+      svg {
+        left: 1em;
+      }
+    }
+  }
+
+  .card-info {
+    position: relative;
+    top: 0;
+    width: 100%;
+  }
+
+  .card-header {
+    margin-block: 0.3em;
+
+    font-size: 1.7rem;
+    .github-link {
+      display: inline-block;
+      margin-inline-end: 1em;
+
+      color: var(--color-main-assents);
+
+      transform: translateY(0.1em);
+    }
+  }
+
+  .card-about-container {
+    position: relative;
+
+    & .after {
+      top: 0.4em;
+      left: 0.4em;
+
+      z-index: 5;
+    }
+
+    svg {
+      display: none;
+    }
+  }
+  .used-teq-container {
+    padding-top: 1em;
   }
 }
 @media (min-width: variables.$bp-sm) {

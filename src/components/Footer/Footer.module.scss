@@ -1,3 +1,5 @@
+@use "src/styles/variables";
+
 .container {
   position: relative;
 
@@ -17,5 +19,24 @@
 
   img {
     min-width: 100%;
+    // max-height: 18em;
+    height: 20em;
   }
+}
+
+@media (min-width: variables.$bp-sm) {
+  .bgImg {
+    img {
+      min-width: 100%;
+      max-height: 18em;
+    }
+  }
+}
+@media (min-width: variables.$bp-md) {
+}
+@media (min-width: variables.$bp-lg) {
+}
+@media (min-width: variables.$bp-xl) {
+}
+@media (min-width: variables.$bp-xxl) {
 }

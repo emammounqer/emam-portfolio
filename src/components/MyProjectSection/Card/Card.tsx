@@ -3,7 +3,7 @@ import styles from "./Card.module.scss";
 
 import project1Img from "./../../../assets/img/project-1-1.png";
 import { FaGithub } from "react-icons/fa";
-import { motion, Variant, Variants } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { useInView } from "../../../hooks/useInView";
 
 const variantsAboutContainer: Variants = {
@@ -40,12 +40,15 @@ interface props {
 }
 
 export const Card: React.FC<props> = ({ dire = "Left", usedTeq }) => {
+  const { ref, isInView } = useInView<HTMLDivElement>({ threshold: 0.4 }, true);
+
   return (
     <motion.div
+      className={`${styles.projectCard} ${styles[`projectCard${dire}`]}`}
+      ref={ref}
       whileInView={{ opacity: 1 }}
       viewport={{ amount: 0.3 }}
       initial={{ opacity: 0.3 }}
-      className={`${styles.projectCard} ${styles[`projectCard${dire}`]}`}
     >
       <img src={project1Img} alt="project1Img" />
       <div className={`${styles.cardInfo}`}>
@@ -59,13 +62,9 @@ export const Card: React.FC<props> = ({ dire = "Left", usedTeq }) => {
           className={styles.cardAboutContainer}
           variants={variantsAboutContainer}
           initial={dire === "Left" ? "initialLeft" : "initialRight"}
-          whileInView={"onView"}
-          viewport={{ amount: 0.4, once: true }}
+          animate={isInView ? "onView" : dire === "Left" ? "initialLeft" : "initialRight"}
         >
-          <motion.div
-            className={`${styles.after}`}
-            variants={variantsContainerAfter}
-          ></motion.div>
+          <motion.div className={`${styles.after}`} variants={variantsContainerAfter}></motion.div>
           <motion.svg
             variants={variantsPin}
             width="20"
@@ -80,8 +79,8 @@ export const Card: React.FC<props> = ({ dire = "Left", usedTeq }) => {
             />
           </motion.svg>
           <p className={styles.cardAbout}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-            vulputate libero et velit interdum, ac aliquet odio mattis.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit
+            interdum, ac aliquet odio mattis.
           </p>
         </motion.div>
         <div className={`${styles.usedTeqContainer}`}>{usedTeq}</div>

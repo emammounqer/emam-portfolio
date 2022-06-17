@@ -1,0 +1,71 @@
+@use "src/styles/variables";
+
+.navList {
+  position: fixed;
+  background: linear-gradient(66.27deg, #1b4564 1.25%, #243674 71.06%, #1c5077 88.52%);
+  backdrop-filter: opacity(0.5);
+
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  list-style: none;
+  margin: 0;
+  padding: 1em;
+
+  transform: translateX(105%);
+  transition: transform 0.3s ease-in-out;
+
+  z-index: 9000;
+}
+
+.logo {
+  height: 2em;
+  margin-bottom: 1em;
+}
+
+.expandBtn {
+  position: fixed;
+  top: 1em;
+  right: 1em;
+
+  border: none;
+  outline: none;
+  background-color: transparent;
+
+  cursor: pointer;
+  z-index: 9999;
+
+  svg {
+    display: block;
+    width: 1.5em;
+  }
+}
+
+.expanded {
+  transform: translateX(0);
+}
+
+.nav-link {
+  display: block;
+  background-color: var(--color-main-assents);
+  padding: 1em;
+  margin-bottom: 1em;
+  backdrop-filter: opacity(30%);
+
+  text-decoration: none;
+  color: white;
+}
+
+.no-scroll {
+  overflow: hidden;
+}
+
+@media (min-width: variables.$bp-sm) {
+  .container {
+    display: none;
+  }
+}
+@media (min-width: variables.$bp-md) {
+}

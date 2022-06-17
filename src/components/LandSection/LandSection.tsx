@@ -50,7 +50,7 @@ export const LandSection: React.FC<props> = ({ openContactForm }) => {
   };
 
   return (
-    <section className={styles.landSectionContainer}>
+    <section className={styles.landSectionContainer} id="land-section">
       <img src="./img/logo.svg" alt="logo" />
       <h1>BUILD INTERACTIVE WEBSITE </h1>
       <p className={styles.textSec} ref={ref}>

@@ -39,9 +39,9 @@ export const TopNavBar: React.FC<props> = ({ navState, setNavState }) => {
           </li>
         </div>
         <div className={`${styles.secLinks}`}>
-          <a href="" className={styles.overlayNavItemOrigin}>
-            &#60; Resume /&#62;
-          </a>
+          <li>
+            <a href="">&#60; Resume /&#62;</a>
+          </li>
         </div>
       </ul>
     </nav>

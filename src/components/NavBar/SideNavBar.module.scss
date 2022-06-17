@@ -1,3 +1,5 @@
+@use "src/styles/variables";
+
 .container {
   position: fixed;
   background-color: var(--color-main-sec, red);
@@ -60,5 +62,11 @@
         filter: grayscale(0.5);
       }
     }
+  }
+}
+
+@media (max-width: variables.$bp-sm) {
+  .container {
+    display: none;
   }
 }

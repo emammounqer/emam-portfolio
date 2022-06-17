@@ -1,6 +1,7 @@
 @use "src/styles/variables";
 .container {
   margin-inline: auto;
+  overflow-x: hidden;
 
   h2 {
     text-align: center;
