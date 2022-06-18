@@ -7,6 +7,9 @@ import sass from "../assets/img/icons/sass.svg";
 import webpack from "../assets/img/icons/webpack.svg";
 import html_5 from "../assets/img/icons/html_5.svg";
 import react from "../assets/img/icons/react.svg";
+import styled_components from "../assets/img/icons/styled_components.svg";
+import typescript from "../assets/img/icons/typescript.svg";
+import tailwindCss from "../assets/img/icons/tailwindcss.svg";
 
 import back_dev from "../assets/img/icons/back_dev.svg";
 import express from "../assets/img/icons/express.svg";
@@ -33,6 +36,9 @@ const ICONS = {
     html_5,
     react,
     javascript,
+    styled_components,
+    typescript,
+    tailwindCss,
   },
 
   back: {

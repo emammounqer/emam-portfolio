@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import styles from "./Card.module.scss";
 
-import project1Img from "./../../../assets/img/project-1-1.png";
 import { FaGithub } from "react-icons/fa";
 import { motion, Variants } from "framer-motion";
 import { useInView } from "../../../hooks/useInView";
+import { Project } from "../../../constant/myProject";
 
 const variantsAboutContainer: Variants = {
   initialLeft: { x: 300 },
@@ -36,10 +36,10 @@ const variantsContainerAfter: Variants = {
 
 interface props {
   dire?: "Left" | "Right";
-  usedTeq: React.ReactNode;
+  project: Project;
 }
 
-export const Card: React.FC<props> = ({ dire = "Left", usedTeq }) => {
+export const Card: React.FC<props> = ({ dire = "Left", project }) => {
   const { ref, isInView } = useInView<HTMLDivElement>({ threshold: 0.4 }, true);
 
   return (
@@ -51,15 +51,17 @@ export const Card: React.FC<props> = ({ dire = "Left", usedTeq }) => {
       initial={{ opacity: 0.3 }}
     >
       <div className={`${styles.imgContainer}`}>
-        <img src={project1Img} alt="project1Img" />
+        <img src={project.image} alt="project1Img" />
       </div>
       <div className={`${styles.cardInfo}`}>
-        <h3 className={styles.cardHeader}>
-          <a className={`${styles.githubLink}`} href="">
+        <header className={`${styles.cardHeader}`}>
+          <a className={styles.cardHeading} role={"heading"} href={project.url} target="_blank">
+            {project.title}
+          </a>
+          <a className={`${styles.githubLink}`} href={project.github}>
             <FaGithub />
           </a>
-          Linking Pages
-        </h3>
+        </header>
         <motion.div
           className={styles.cardAboutContainer}
           variants={variantsAboutContainer}
@@ -80,12 +82,13 @@ export const Card: React.FC<props> = ({ dire = "Left", usedTeq }) => {
               fill="#A14A76"
             />
           </motion.svg>
-          <p className={styles.cardAbout}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit
-            interdum, ac aliquet odio mattis.
-          </p>
+          <p className={styles.cardAbout}>{project.description}</p>
         </motion.div>
-        <div className={`${styles.usedTeqContainer}`}>{usedTeq}</div>
+        <div className={`${styles.usedTeqContainer}`}>
+          {project.technologies.map((tech) => (
+            <img className={`${styles.techIcon}`} src={tech.icon} key={tech.title}></img>
+          ))}
+        </div>
       </div>
     </motion.div>
   );
