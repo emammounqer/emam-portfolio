@@ -11,12 +11,17 @@ Project Description
 - [ ] fix the position of to overlay btn in land section  
 - [ ] loading animation (logo)  
 
+### Important
+
+- [ ] link my contact form to my email  
+- [ ] change favicon  
+
 ### In Progress
 
-- [ ] add my project  
 
 ### Done ✓
 
 - [x] make the nav link work  
+- [x] add my project  
 - [x] my project section make it 100% width if screen smaller than md  
 
