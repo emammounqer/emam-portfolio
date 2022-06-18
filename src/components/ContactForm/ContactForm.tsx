@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
+import emailjs from "@emailjs/browser";
 
 import styles from "./ContactForm.module.scss";
 
@@ -35,16 +36,15 @@ interface props {
   isContactForm: boolean;
   closeContactForm: () => void;
 }
-export const ContactForm: React.FC<props> = ({
-  isContactForm,
-  closeContactForm,
-}) => {
+export const ContactForm: React.FC<props> = ({ isContactForm, closeContactForm }) => {
   //state
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
   //effects
   useEffect(() => {
@@ -56,15 +56,31 @@ export const ContactForm: React.FC<props> = ({
   }, [isContactForm]);
 
   //functions
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setError("");
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    const form = e.target as HTMLFormElement;
+    setError("");
+    setIsLoading(true);
+    emailjs.sendForm("service_4qzafa7", "template_zddwtsp", form, "P0bFXaTqDvwsqwS5k").then(
+      (result) => {
+        console.log(result);
+        setFormData({
+          name: "",
+          email: "",
+          message: "",
+        });
+        closeContactForm();
+        setError("");
+      },
+      (error) => {
+        setError(error.text);
+      },
+    );
   };
 
   return (
@@ -77,10 +93,8 @@ export const ContactForm: React.FC<props> = ({
           exit={"exit"}
           className={`${styles.contactFormContainer}`}
         >
-          <motion.header
-            variants={headerVariants}
-            className={`${styles.header}`}
-          >
+          <div className={`${styles.backdrop}`}></div>
+          <motion.header variants={headerVariants} className={`${styles.header}`}>
             <h2>Contact Me</h2>
             <button className={`${styles.closeBtn}`} onClick={closeContactForm}>
               X
@@ -93,10 +107,7 @@ export const ContactForm: React.FC<props> = ({
             onSubmit={handleSubmit}
           >
             <div className={`${styles.inputWrapper}`}>
-              <label
-                htmlFor="name"
-                className={`${styles.nameLabel} ${styles.label}`}
-              >
+              <label htmlFor="name" className={`${styles.nameLabel} ${styles.label}`}>
                 Name
               </label>
               <input
@@ -133,9 +144,10 @@ export const ContactForm: React.FC<props> = ({
                 required
               ></textarea>
             </div>
+            {error && <p className={`${styles.error}`}>{error}</p>}
 
             <button type="submit" className={`${styles.btn}`}>
-              Submit
+              {isLoading ? "Sending..." : "Send"}
             </button>
           </motion.form>
         </motion.section>

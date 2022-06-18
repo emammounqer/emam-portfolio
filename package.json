@@ -8,6 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emailjs/browser": "^3.6.2",
     "@types/react-scroll": "^1.8.3",
     "framer-motion": "^6.3.10",
     "global": "^4.4.0",

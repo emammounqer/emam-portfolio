@@ -14,13 +14,13 @@ Project Description
 
 ### Important
 
-- [ ] link my contact form to my email  
 
 ### In Progress
 
 
 ### Done ✓
 
+- [x] link my contact form to my email  
 - [x] make the nav link work  
 - [x] add my project  
 - [x] my project section make it 100% width if screen smaller than md  
