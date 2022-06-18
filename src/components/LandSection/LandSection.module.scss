@@ -86,7 +86,7 @@
 
 .contact-animation {
   $right: 2em;
-  $bottom: 13em;
+  $bottom: 9em;
 
   &-enter {
     transform: translate(calc(-1 * var(--transformX-elem) - $right), calc(var(--transformY-elem) - $bottom));
@@ -133,6 +133,7 @@
   top: 0;
 
   margin: 3em;
+  z-index: 8000;
 
   li {
     padding-right: 2.5em;

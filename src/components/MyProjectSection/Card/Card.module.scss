@@ -7,7 +7,6 @@
 
   min-height: 24em;
   margin-bottom: 4em;
-  padding: 2em;
 }
 
 .project-card-left {
@@ -157,6 +156,7 @@
   }
 
   .card-header {
+    margin-bottom: 0.1em;
     .card-heading {
       margin-block: 0.3em;
     }

@@ -11,6 +11,7 @@ interface NavLinks {
 export const navLinks: NavLinks = {
   selfLinks: [
     { title: "Home", link: "land-section" },
+    { title: "WhatIUse", link: "what-i-use-section" },
     { title: "Project", link: "project-section" },
   ],
   outerLinks: [{ title: "Resume", link: "./Emam-al-Mounqer.pdf" }],

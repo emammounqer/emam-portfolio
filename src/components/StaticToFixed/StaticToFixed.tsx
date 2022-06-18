@@ -37,7 +37,7 @@ export const StaticToFixed = forwardRef<HTMLDivElement, props>(
     return (
       <div
         className={`${inStyles.staticToFixedContainer}`}
-        style={{ height, width, position: "relative", zIndex: 1000 }}
+        style={{ height, width }}
         ref={(node) => {
           if (node === null) return;
           elemContainerRef.current = node;

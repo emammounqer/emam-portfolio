@@ -79,10 +79,10 @@ export const LandSection: React.FC<props> = ({ openContactForm }) => {
           classes="bottom-right"
           height="5em"
           width="5em"
-          bottom="6em"
+          bottom="2em"
         >
           <li className={`${styles.linkIcon}`}>
-            <a href="https://www.linkedin.com/in/emam-almounqer" target="anagreh-linkedin">
+            <a href="https://www.linkedin.com/in/emamalmounqer" target="anagreh-linkedin">
               <FaLinkedin />
             </a>
           </li>
@@ -92,7 +92,7 @@ export const LandSection: React.FC<props> = ({ openContactForm }) => {
           classes="bottom-right"
           height="5em"
           width="5em"
-          bottom="9em"
+          bottom="5em"
         >
           <li className={`${styles.linkIcon}`}>
             <a href="https://github.com/anagreh" target="anagreh-github">

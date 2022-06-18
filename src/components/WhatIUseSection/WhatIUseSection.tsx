@@ -11,7 +11,7 @@ export const WhatIUseSection = () => {
         <img src="./img/screw.svg" className={styles.screw} />
         <img src="./img/screw.svg" className={styles.screw} />
 
-        <div className={`${styles.grid}`}>
+        <div id="what-i-use-section" className={`${styles.grid}`}>
           {/* frond end icons */}
           <div className={`${styles.cell}`}>
             <div className={styles.cellHeader}>

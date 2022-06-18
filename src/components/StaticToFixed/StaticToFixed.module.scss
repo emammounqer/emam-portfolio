@@ -1,9 +1,10 @@
 .static-to-fixed-container {
   --bottom: 2em;
   --right: 2em;
-
+  position: "relative";
   display: grid;
   place-items: center;
+  z-index: 8000;
 }
 
 .bottom-right {
@@ -28,6 +29,8 @@
       calc(var(--transformX-elem) + var(--right)),
       calc(-1 * var(--transformY-elem) + var(--bottom))
     );
+
+    z-index: 9000;
   }
   &-exit-done {
     position: fixed;
@@ -36,5 +39,6 @@
     transition: transform 0.5s;
 
     transform: translate(0, 0);
+    z-index: 9000;
   }
 }
