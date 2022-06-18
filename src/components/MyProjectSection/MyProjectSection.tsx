@@ -12,7 +12,7 @@ export const MyProjectSection = () => {
       {myProjects.map((project, i) => {
         const dire = i % 2 === 0 ? "Left" : "Right";
 
-        return <Card project={project} dire={dire} />;
+        return <Card project={project} dire={dire} key={project.title} />;
       })}
     </section>
   );

@@ -37,7 +37,7 @@ export const MobileNavBar = (props: Props) => {
         <img src="/img/Logo.svg" alt="" className={`${styles.logo}`} />
 
         {navLinks.selfLinks.map((link) => (
-          <li>
+          <li key={"mobile" + link.title}>
             <Link
               className={`${styles.scrollLink} ${styles.navLink}`}
               to={link.link}
@@ -49,7 +49,7 @@ export const MobileNavBar = (props: Props) => {
           </li>
         ))}
         {navLinks.outerLinks.map((link) => (
-          <li>
+          <li key={"mobile" + link.title}>
             <a className={`${styles.navLink}`} href={link.link}>
               &#60; {link.title} /&#62;
             </a>

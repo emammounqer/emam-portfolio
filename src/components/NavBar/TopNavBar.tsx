@@ -32,7 +32,7 @@ export const TopNavBar: React.FC<props> = ({ navState, setNavState }) => {
       <ul className={styles.navLinks} role="list">
         <div className={styles.links}>
           {navLinks.selfLinks.map((link) => (
-            <li>
+            <li key={"top" + link.title}>
               <Link
                 className={`${styles.scrollLink} ${
                   link.title === "Home" ? styles.linkSelected : ""
@@ -47,7 +47,7 @@ export const TopNavBar: React.FC<props> = ({ navState, setNavState }) => {
         </div>
         <div className={`${styles.secLinks}`}>
           {navLinks.outerLinks.map((link) => (
-            <li>
+            <li key={"top" + link.title}>
               <a href={link.link}>&#60; {link.title} /&#62;</a>
             </li>
           ))}

@@ -5,7 +5,6 @@ Project Description
 ### ToDo
 
 - [ ] add fb backend repo  
-- [ ] card padding in small sreen  
 - [ ] design the side navbar  
 - [ ] some touch on contact form  
 - [ ] hide the contact button at the bottom  
@@ -20,6 +19,7 @@ Project Description
 
 ### Done ✓
 
+- [x] card padding in small sreen  
 - [x] link my contact form to my email  
 - [x] make the nav link work  
 - [x] add my project  

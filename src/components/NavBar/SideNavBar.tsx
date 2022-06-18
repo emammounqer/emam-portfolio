@@ -14,14 +14,14 @@ export const SideNavBar: React.FC<props> = ({ navState }) => {
     <nav className={`${styles.container} ${navState === "side" ? styles.containerActive : ""}`}>
       <ul className={styles.navLinks} role="list">
         {navLinks.selfLinks.map((link) => (
-          <li>
+          <li key={"side" + link.title}>
             <Link className={`${styles.scrollLink}`} to={link.link} smooth={true}>
               {link.title}
             </Link>
           </li>
         ))}
         {navLinks.outerLinks.map((link) => (
-          <li>
+          <li key={"side" + link.title}>
             <a href={link.link}>&#60; {link.title} /&#62;</a>
           </li>
         ))}
