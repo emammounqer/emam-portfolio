@@ -2,13 +2,6 @@
 .container {
   margin-inline: auto;
   overflow-x: hidden;
-
-  h2 {
-    text-align: center;
-    font-size: 2.3rem;
-
-    margin-block: 1em;
-  }
 }
 
 @media (min-width: variables.$bp-sm) {

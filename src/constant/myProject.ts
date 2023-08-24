@@ -12,6 +12,18 @@ export interface Project {
   github: string;
 }
 
+export type FullProject =  {
+  title: string;
+  website: string;
+  problemDomain: string;
+  technologies: Technology[];
+  date : string;
+  about: string;
+  notes: string[];
+  demo: string;
+  imageUrl: string;
+}
+
 export const fbClone: Project = {
   title: "Facebook Clone",
   description:
@@ -47,5 +59,6 @@ export const pomodoroTimer: Project = {
   technologies: [technologies.react, technologies.tailwindCss, technologies.typescript],
   github: "https://github.com/anagreh/pomodoro-timer",
 };
+
 
 export const myProjects: Project[] = [fbClone, dentistPage, pomodoroTimer];

@@ -85,7 +85,11 @@
   .card-about {
     position: relative;
     z-index: 10;
-    background-color: var(--color-main-sec);
+    background-color: var(--color-main-bg);
+    color:white ;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: justify;
+    direction: ltr;
     padding-block: 2em;
     padding-inline: 0.5em;
     min-height: 8em;
