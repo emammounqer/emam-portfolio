@@ -34,9 +34,11 @@ interface props {
 }
 
 export const Card: React.FC<props> = ({ dire = "Left", project }) => {
-  const [slideSelected, setSlideSelected] = useState<number>(1);
+  const [slideSelected, setSlideSelected] = useState<number>(0);
   const interval = useRef<number>();
   const { isInView, ref } = useInView<HTMLVideoElement>({ threshold: 0.7 });
+
+  const allSlides = [project.description, ...project.notes];
 
   if (isInView) {
     ref.current?.play();
@@ -58,7 +60,7 @@ export const Card: React.FC<props> = ({ dire = "Left", project }) => {
   };
 
   const goToNextSlide = () => {
-    setSlideSelected((prev) => (prev >= 2 ? 1 : prev + 1));
+    setSlideSelected((prev) => (prev >= allSlides.length - 1 ? 0 : prev + 1));
   };
 
   const handleOnSelectSliderClick = (index: number) => {
@@ -68,44 +70,56 @@ export const Card: React.FC<props> = ({ dire = "Left", project }) => {
   // #endregion
 
   return (
-    <div className="flex h-96 bg-slate-500">
-      <div className="z-20 w-3/5 bg-red-200 rounded-3xl shrink-0 grid  place-items-center overflow-hidden">
-        <video ref={ref} src="/vid/beit-aziz.mp4" muted controls></video>
+    <div className="flex flex-col bg-red-400 rounded-t-3xl md:rounded-s-3xl md:flex-row md:h-96">
+      <div className="z-20 grid w-full overflow-hidden rounded-3xl bg-slate-400 shrink-0 place-items-center md:w-3/5">
+        <video
+          ref={ref}
+          src="/vid/beit-aziz.mp4"
+          muted
+          controls
+          className="rounded-lg"
+        ></video>
       </div>
-      <div className="relative flex flex-col w-full bg-green-200 ">
-        <h2 className="text-xl leading-relaxed text-center">{project.title}</h2>
-        <div className="absolute top-0 bottom-0 z-10 inline-flex flex-col items-start justify-center gap-3 p-1 my-auto">
-          {btns.map((btn) => (
-            <motion.button
-              key={btn}
-              variants={variantSliderButton}
-              animate={slideSelected === btn ? "selected" : "initial"}
-              className={`w-4 h-4 rounded-full bg-zinc-300`}
-              onClick={() => handleOnSelectSliderClick(btn)}
+      <div className="relative flex flex-col w-full ">
+        <span className="inline-flex items-center justify-between p-3">
+          <h2 className="text-xl leading-relaxed">{project.title}</h2>
+          <p>Jun - 2016</p>
+        </span>
+
+        <div className="relative flex-grow h-64 overflow-y-hidden text-justify rounded-e-xl md:h-auto">
+          {allSlides.map((note, i) => (
+            <motion.div
+              className="absolute h-full p-8 overflow-y-auto rounded-tr-lg rounded-br-lg bg-amber-700"
+              variants={variantSlider}
+              animate={slideSelected === i ? "selected" : "initial"}
+            >
+              <p>{note}</p>
+              <div className="absolute top-0 bottom-0 border border-l border-dashed opacity-25 left-6"></div>
+            </motion.div>
+          ))}
+
+          <div className="absolute top-0 bottom-0 z-10 inline-flex flex-col items-start justify-center gap-3 p-1 my-auto">
+            {allSlides.map((_, i) => (
+              <motion.button
+                key={i}
+                variants={variantSliderButton}
+                animate={slideSelected === i ? "selected" : "initial"}
+                className={`w-4 h-4 rounded-full bg-blue-800`}
+                onClick={() => handleOnSelectSliderClick(i)}
+              />
+            ))}
+          </div>
+        </div>
+
+        <div className="flex items-center justify-between px-6 py-3">
+          {project.technologies.map((tech) => (
+            <img
+              key={tech.title}
+              src={tech.icon}
+              alt={tech.title}
+              className="w-6 h-6"
             />
           ))}
-        </div>
-        <div className="relative flex-grow bg-purple-600">
-          <motion.div
-            className="absolute h-full p-6 text-justify rounded-tr-lg rounded-br-lg bg-cyan-500"
-            variants={variantSlider}
-            animate={slideSelected === 1 ? "selected" : "initial"}
-          >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat
-            accusantium possimus quia sit laudantium, vero impedit itaque fuga.
-            Sed sit vitae accusamus quos, illum repudiandae voluptas blanditiis
-            ab nisi consectetur?
-          </motion.div>
-          <motion.div
-            className="absolute h-full p-6 bg-amber-500"
-            variants={variantSlider}
-            animate={slideSelected === 2 ? "selected" : "initial"}
-          >
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex
-            voluptatem culpa numquam, inventore quaerat, harum totam odio, ipsam
-            dolore id mollitia enim accusantium cupiditate quam tempore
-            doloribus possimus sequi ipsum.
-          </motion.div>
         </div>
       </div>
     </div>

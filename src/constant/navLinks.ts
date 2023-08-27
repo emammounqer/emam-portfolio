@@ -14,5 +14,5 @@ export const navLinks: NavLinks = {
     { title: "WhatIUse", link: "what-i-use-section" },
     { title: "Project", link: "project-section" },
   ],
-  outerLinks: [{ title: "Resume", link: "./Emam-al-Mounqer.pdf" }],
+  outerLinks: [{ title: "Resume", link: "./cvs/Emam_al_Mounqer_CV.pdf" }],
 };

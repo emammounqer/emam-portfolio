@@ -7,7 +7,7 @@ import styles from "./MyProjectSection.module.scss";
 export const MyProjectSection = () => {
   return (
     <section id="project-section" className={`${styles.container}`}>
-      <h2 className="text-center text-2xl p-12">My Work</h2>
+      <h2 className="p-12 text-2xl text-center">My Work</h2>
 
       <div className="flex flex-col gap-12">
         {myProjects.map((project, i) => {

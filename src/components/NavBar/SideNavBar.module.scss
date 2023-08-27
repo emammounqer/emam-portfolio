@@ -69,7 +69,7 @@
   cursor: pointer;
 }
 
-@media (max-width: variables.$bp-sm) {
+@media (max-width: variables.$bp-md) {
   .container {
     display: none;
   }
