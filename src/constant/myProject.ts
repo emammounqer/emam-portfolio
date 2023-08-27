@@ -22,7 +22,7 @@ export interface Project {
 export const fbClone: Project = {
   title: "Facebook Clone",
   description:
-    "It is a clone of Facebook website. It is a simple clone of Facebook website, which is built with ReactJS, ExpressJS as backend and MongoDB as data base, it is a full-stack application. ",
+    "It is a clone of Facebook website. It is a simple clone of Facebook website, which is built with ReactJS, ExpressJS as backend and MongoDB as data base, it is a full-stack application.",
   links: {
     live: "https://ema-fb.netlify.app",
     github: "https://github.com/anagreh/facebook-clone",
@@ -35,8 +35,8 @@ export const fbClone: Project = {
     technologies.rest,
     technologies.express,
   ],
-  date: "2021-01-01",
-  notes: ['all components are done from scratch'],
+  date: "Jul 2022",
+  notes: ['All components are done by me from scratch'],
   tags: ["web", "full-stack"],
 
 };

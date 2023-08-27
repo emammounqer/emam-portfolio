@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import styles from "./Card.module.scss";
+import { motion, Variants } from "framer-motion";
+import { FaGithub, FaPlay } from "react-icons/fa";
 
-import { FaGithub } from "react-icons/fa";
-import { animate, motion, Variants } from "framer-motion";
+import styles from "./Card.module.scss";
 import { useInView } from "../../../hooks/useInView";
 import { Project } from "../../../constant/myProject";
 
@@ -25,8 +25,6 @@ const variantSlider: Variants = {
     transition: { duration: 0.5 },
   },
 };
-
-const btns = [1, 2, 3, 4];
 
 interface props {
   dire?: "Left" | "Right";
@@ -56,7 +54,7 @@ export const Card: React.FC<props> = ({ dire = "Left", project }) => {
     interval.current = setInterval(() => {
       if (!isInView) return;
       goToNextSlide();
-    }, 5000);
+    }, 7000);
   };
 
   const goToNextSlide = () => {
@@ -70,26 +68,53 @@ export const Card: React.FC<props> = ({ dire = "Left", project }) => {
   // #endregion
 
   return (
-    <div className="flex flex-col bg-red-400 rounded-t-3xl md:rounded-s-3xl md:flex-row md:h-96">
-      <div className="z-20 grid w-full overflow-hidden rounded-3xl bg-slate-400 shrink-0 place-items-center md:w-3/5">
-        <video
-          ref={ref}
-          src="/vid/beit-aziz.mp4"
-          muted
-          controls
-          className="rounded-lg"
-        ></video>
+    <div
+      className={`flex flex-col rounded-t-3xl md:rounded-tr-none md:rounded-s-3xl md:flex-row shadow-lg ${styles.gradientBackground}`}
+    >
+      <div
+        className={`z-20 grid w-full overflow-hidden rounded-3xl shrink-0 place-items-center md:w-3/5 `}
+      >
+        {project.demoVid ? (
+          <video
+            ref={ref}
+            src={project.demoVid}
+            muted
+            controls
+            className="rounded-lg"
+          ></video>
+        ) : (
+          <img
+            src={project.imageUrl}
+            alt={project.title}
+            className="rounded-lg"
+          />
+        )}
       </div>
-      <div className="relative flex flex-col w-full ">
+
+      <div className={`relative flex flex-col w-full text-white `}>
         <span className="inline-flex items-center justify-between p-3">
-          <h2 className="text-xl leading-relaxed">{project.title}</h2>
-          <p>Jun - 2016</p>
+          <span className="inline-flex items-center gap-2">
+            <h2 className="text-lg leading-relaxed uppercase">
+              {project.title}
+            </h2>
+            {project.links.live && (
+              <a href={project.links.live}>
+                <FaPlay />
+              </a>
+            )}
+            {project.links.github && (
+              <a href={project.links.github}>
+                <FaGithub />
+              </a>
+            )}
+          </span>
+          <p>{project.date}</p>
         </span>
 
-        <div className="relative flex-grow h-64 overflow-y-hidden text-justify rounded-e-xl md:h-auto">
+        <div className="relative flex-grow h-64 overflow-y-hidden font-semibold text-justify text-slate-900 rounded-e-xl md:h-auto">
           {allSlides.map((note, i) => (
             <motion.div
-              className="absolute h-full p-8 overflow-y-auto rounded-tr-lg rounded-br-lg bg-amber-700"
+              className="absolute h-full p-8 overflow-y-auto rounded-tr-lg rounded-br-lg shadow bg-section"
               variants={variantSlider}
               animate={slideSelected === i ? "selected" : "initial"}
             >
@@ -104,7 +129,7 @@ export const Card: React.FC<props> = ({ dire = "Left", project }) => {
                 key={i}
                 variants={variantSliderButton}
                 animate={slideSelected === i ? "selected" : "initial"}
-                className={`w-4 h-4 rounded-full bg-blue-800`}
+                className={`w-4 h-4 rounded-full bg-assent`}
                 onClick={() => handleOnSelectSliderClick(i)}
               />
             ))}
