@@ -6,10 +6,8 @@ import { StaticToFixed } from "../StaticToFixed";
 
 import ICONS from "../../constant/icons";
 import { useEffect, useRef, useState } from "react";
-import { transform } from "framer-motion";
 
-const icons = Object.values(ICONS);
-const allIcons = icons.reduce<string[]>((array, icon) => [...array, ...Object.values(icon)], []);
+const allIcons = Object.values(ICONS);
 
 interface props {
   openContactForm: () => void;

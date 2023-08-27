@@ -114,6 +114,7 @@ export const Card: React.FC<props> = ({ dire = "Left", project }) => {
         <div className="relative flex-grow h-64 overflow-y-hidden font-semibold text-justify text-slate-900 rounded-e-xl md:h-auto">
           {allSlides.map((note, i) => (
             <motion.div
+              key={i}
               className="absolute h-full p-8 overflow-y-auto rounded-tr-lg rounded-br-lg shadow bg-section"
               variants={variantSlider}
               animate={slideSelected === i ? "selected" : "initial"}
@@ -140,7 +141,7 @@ export const Card: React.FC<props> = ({ dire = "Left", project }) => {
           {project.technologies.map((tech) => (
             <img
               key={tech.title}
-              src={tech.icon}
+              src={tech.iconSrc}
               alt={tech.title}
               className="w-6 h-6"
             />
