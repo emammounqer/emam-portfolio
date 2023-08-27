@@ -6,10 +6,8 @@ import { StaticToFixed } from "../StaticToFixed";
 
 import ICONS from "../../constant/icons";
 import { useEffect, useRef, useState } from "react";
-import { transform } from "framer-motion";
 
-const icons = Object.values(ICONS);
-const allIcons = icons.reduce<string[]>((array, icon) => [...array, ...Object.values(icon)], []);
+const allIcons = Object.values(ICONS);
 
 interface props {
   openContactForm: () => void;
@@ -95,7 +93,7 @@ export const LandSection: React.FC<props> = ({ openContactForm }) => {
           bottom="5em"
         >
           <li className={`${styles.linkIcon}`}>
-            <a href="https://github.com/anagreh" target="anagreh-github">
+            <a href="https://github.com/emammounqer" target="emammounqer-github">
               <FaGithub />
             </a>
           </li>

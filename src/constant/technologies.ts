@@ -1,49 +1,49 @@
-import ICONS from "./icons";
+import AllIcons from "./icons";
 
-export class Technology {
+export type Technology =  {
   title: string;
-  icon: string;
-
-  constructor(title: string, icon: string) {
-    this.title = title;
-    this.icon = icon;
-  }
+  iconSrc: string;
 }
 
-export const react = new Technology("react", ICONS.front.react);
-export const typescript = new Technology("typescript", ICONS.front.typescript);
-export const sass = new Technology("styled-component", ICONS.front.sass);
-export const styledComponent = new Technology("styled-component", ICONS.front.styled_components);
-export const bootstrap = new Technology("bootstrap", ICONS.front.bootstrap);
-export const css3 = new Technology("css3", ICONS.front.css_3);
-export const html5 = new Technology("html5", ICONS.front.html_5);
-export const javascript = new Technology("javascript", ICONS.front.javascript);
-export const tailwindCss = new Technology("javascript", ICONS.front.tailwindCss);
+export const frontEndTech = {
+  html_5: { title: "HTML 5", iconSrc: AllIcons.html_5 },
+  css_3:{ title: "CSS 3", iconSrc: AllIcons.css_3 },
+  javascript: { title: "JavaScript", iconSrc: AllIcons.javascript },
+  bootstrap:{ title: "Bootstrap", iconSrc: AllIcons.bootstrap },
+  react: { title: "React", iconSrc: AllIcons.react },
+  webpack: { title: "Webpack", iconSrc: AllIcons.webpack },
+  typescript:{ title: "TypeScript", iconSrc: AllIcons.typescript },
+  figma: { title: "Figma", iconSrc: AllIcons.figma },
+  tailwindCss: { title: "tailwindCss", iconSrc: AllIcons.tailwindCss },
+  nextJs: { title: "Next.js", iconSrc: AllIcons.nextjs },
+}
 
-export const node = new Technology("node", ICONS.back.nodejs);
-export const express = new Technology("express", ICONS.back.express);
-export const mongo = new Technology("mongo", ICONS.back.mongodb);
-export const mysql = new Technology("mysql", ICONS.back.mysql);
-export const rest = new Technology("rest", ICONS.back.rest_api);
+export const backEndTech= {
+  node : { title: "Node.js", iconSrc: AllIcons.nodejs },
+  express: { title: "Express", iconSrc: AllIcons.express },
+  restApi: { title: "REST API", iconSrc: AllIcons.rest_api },
+  django: { title: "Django", iconSrc: AllIcons.django },
+  postgress: { title: "PostgreSQL", iconSrc: AllIcons.postgress },
+  python: { title: "python", iconSrc: AllIcons.python },
+};
 
-export const github = new Technology("github", ICONS.other.github);
-export const git = new Technology("git", ICONS.other.git);
+export const otherTech = {
+  git: { title: "Git", iconSrc: AllIcons.git },
+  github: { title: "GitHub", iconSrc: AllIcons.github },
+};
+
+
 
 export const technologies = {
-  react,
-  sass,
-  bootstrap,
-  css3,
-  html5,
-  javascript,
-  node,
-  express,
-  mongo,
-  mysql,
-  rest,
-  github,
-  git,
-  typescript,
-  styledComponent,
-  tailwindCss,
+  ...frontEndTech,
+  ...backEndTech,
+  ...otherTech,
 };
+
+export const allTechnologies = {
+  ...frontEndTech,
+  ...backEndTech,
+  ...otherTech,
+  styledComponents: { title: "Styled Components", iconSrc: AllIcons.styledComponents },
+  mongoDB: { title: "MongoDB", iconSrc: AllIcons.mongodb },
+}

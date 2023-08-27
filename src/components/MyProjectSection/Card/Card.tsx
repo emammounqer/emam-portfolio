@@ -1,36 +1,28 @@
-import React, { useState } from "react";
-import styles from "./Card.module.scss";
-
-import { FaGithub } from "react-icons/fa";
+import React, { useEffect, useRef, useState } from "react";
 import { motion, Variants } from "framer-motion";
+import { FaGithub, FaPlay } from "react-icons/fa";
+
+import styles from "./Card.module.scss";
 import { useInView } from "../../../hooks/useInView";
 import { Project } from "../../../constant/myProject";
 
-const variantsAboutContainer: Variants = {
-  initialLeft: { x: 300 },
-  initialRight: { x: -300 },
-  onView: {
-    x: 0,
-    opacity: 1,
-    transition: {
-      when: "beforeChildren",
-      staggerChildren: 0.3,
-    },
-  },
-};
-const initialVariantPin = { scale: 1.3, x: 15, y: -10 };
-const variantsPin: Variants = {
-  initialLeft: initialVariantPin,
-  initialRight: initialVariantPin,
-  onView: { scale: 1, x: 0, y: 0, transition: { ease: "easeOut" } },
+const variantSliderButton: Variants = {
+  initial: { height: 16 },
+  selected: { height: 28 },
 };
 
-const variantsContainerAfter: Variants = {
-  onView: {
-    rotate: [0, 2, 0],
-    originX: 0,
-    originY: 0,
-    transition: { duration: 0.3, ease: "easeInOut" },
+const variantSlider: Variants = {
+  initial: {
+    rotateY: 120,
+    opacity: 0.9,
+    transformOrigin: "left",
+    transition: { duration: 0.5 },
+  },
+  selected: {
+    rotateY: 0,
+    opacity: 1,
+    transformOrigin: "left",
+    transition: { duration: 0.5 },
   },
 };
 
@@ -40,57 +32,123 @@ interface props {
 }
 
 export const Card: React.FC<props> = ({ dire = "Left", project }) => {
-  const { ref, isInView } = useInView<HTMLDivElement>({ threshold: 0.4 }, true);
+  const [slideSelected, setSlideSelected] = useState<number>(0);
+  const interval = useRef<number>();
+  const { isInView, ref } = useInView<HTMLVideoElement>({ threshold: 0.7 });
+
+  const allSlides = [project.description, ...project.notes];
+
+  if (isInView) {
+    ref.current?.play();
+  } else {
+    ref.current?.pause();
+  }
+  // #region slide
+  useEffect(() => {
+    resetTimer();
+    return () => clearInterval(interval.current);
+  }, [isInView]);
+
+  const resetTimer = () => {
+    clearInterval(interval.current);
+    interval.current = setInterval(() => {
+      if (!isInView) return;
+      goToNextSlide();
+    }, 7000);
+  };
+
+  const goToNextSlide = () => {
+    setSlideSelected((prev) => (prev >= allSlides.length - 1 ? 0 : prev + 1));
+  };
+
+  const handleOnSelectSliderClick = (index: number) => {
+    resetTimer();
+    setSlideSelected(index);
+  };
+  // #endregion
 
   return (
-    <motion.div
-      className={`${styles.projectCard} ${styles[`projectCard${dire}`]}`}
-      ref={ref}
-      whileInView={{ opacity: 1 }}
-      viewport={{ amount: 0.3 }}
-      initial={{ opacity: 0.3 }}
+    <div
+      className={`flex flex-col rounded-t-3xl md:rounded-tr-none md:rounded-s-3xl md:flex-row shadow-lg ${styles.gradientBackground}`}
     >
-      <div className={`${styles.imgContainer}`}>
-        <img src={project.image} alt="project1Img" />
+      <div
+        className={`z-20 grid w-full overflow-hidden rounded-3xl shrink-0 place-items-center md:w-3/5 `}
+      >
+        {project.demoVid ? (
+          <video
+            ref={ref}
+            src={project.demoVid}
+            muted
+            controls
+            className="rounded-lg"
+          ></video>
+        ) : (
+          <img
+            src={project.imageUrl}
+            alt={project.title}
+            className="rounded-lg"
+          />
+        )}
       </div>
-      <div className={`${styles.cardInfo}`}>
-        <header className={`${styles.cardHeader}`}>
-          <a className={styles.cardHeading} role={"heading"} href={project.url} target="_blank">
-            {project.title}
-          </a>
-          <a className={`${styles.githubLink}`} href={project.github}>
-            <FaGithub />
-          </a>
-        </header>
-        <motion.div
-          className={styles.cardAboutContainer}
-          variants={variantsAboutContainer}
-          initial={dire === "Left" ? "initialLeft" : "initialRight"}
-          animate={isInView ? "onView" : dire === "Left" ? "initialLeft" : "initialRight"}
-        >
-          <motion.div className={`${styles.after}`} variants={variantsContainerAfter}></motion.div>
-          <motion.svg
-            variants={variantsPin}
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M4.77397 15.287L2.66897 18.537L2.89297 19.6L3.95297 19.373L6.05697 16.125C5.60453 15.8856 5.17506 15.6051 4.77397 15.287ZM13.686 14.152C13.7 14.123 13.709 14.091 13.722 14.06C13.775 13.943 13.822 13.826 13.86 13.703C13.866 13.681 13.869 13.659 13.876 13.639C13.915 13.5046 13.9477 13.3685 13.974 13.231V13.21C14.169 12.041 13.829 10.737 13.051 9.55901L14.161 7.84501C15.44 8.00801 16.546 7.68601 17.078 6.86301C18.001 5.44001 16.878 3.07101 14.573 1.57001C12.266 0.0680118 9.64997 0.00501168 8.72897 1.42601C8.19497 2.25001 8.35097 3.39301 9.02197 4.49901L7.90997 6.21301C6.52097 5.98001 5.19397 6.19701 4.20697 6.85301C4.20097 6.85501 4.19397 6.85701 4.18997 6.86101C4.07465 6.93941 3.96381 7.02421 3.85797 7.11501C3.84097 7.12901 3.82097 7.14201 3.80697 7.15601C3.71097 7.24085 3.62045 7.3317 3.53597 7.42801C3.51597 7.45201 3.48797 7.47301 3.46897 7.49801C3.36247 7.61863 3.26551 7.74735 3.17897 7.88301C1.79497 10.016 2.97597 13.244 5.81197 15.092C8.64997 16.94 12.072 16.706 13.453 14.573C13.54 14.438 13.62 14.297 13.686 14.152ZM12.871 4.19401C11.984 3.61701 11.551 2.70701 11.906 2.15801C12.26 1.61101 13.267 1.63601 14.152 2.21301C15.041 2.79001 15.47 3.70201 15.117 4.24901C14.764 4.79601 13.759 4.77101 12.871 4.19401Z"
-              fill="#A14A76"
-            />
-          </motion.svg>
-          <p className={styles.cardAbout}>{project.description}</p>
-        </motion.div>
-        <div className={`${styles.usedTeqContainer}`}>
+
+      <div className={`relative flex flex-col w-full text-white `}>
+        <span className="inline-flex items-center justify-between p-3">
+          <span className="inline-flex items-center gap-2">
+            <h2 className="text-lg leading-relaxed uppercase">
+              {project.title}
+            </h2>
+            {project.links.live && (
+              <a href={project.links.live}>
+                <FaPlay />
+              </a>
+            )}
+            {project.links.github && (
+              <a href={project.links.github}>
+                <FaGithub />
+              </a>
+            )}
+          </span>
+          <p>{project.date}</p>
+        </span>
+
+        <div className="relative flex-grow h-64 overflow-y-hidden font-semibold text-justify text-slate-900 rounded-e-xl md:h-auto">
+          {allSlides.map((note, i) => (
+            <motion.div
+              key={i}
+              className="absolute h-full p-8 overflow-y-auto rounded-tr-lg rounded-br-lg shadow bg-section"
+              variants={variantSlider}
+              animate={slideSelected === i ? "selected" : "initial"}
+            >
+              <p>{note}</p>
+              <div className="absolute top-0 bottom-0 border border-l border-dashed opacity-25 left-6"></div>
+            </motion.div>
+          ))}
+
+          <div className="absolute top-0 bottom-0 z-10 inline-flex flex-col items-start justify-center gap-3 p-1 my-auto">
+            {allSlides.map((_, i) => (
+              <motion.button
+                key={i}
+                variants={variantSliderButton}
+                animate={slideSelected === i ? "selected" : "initial"}
+                className={`w-4 h-4 rounded-full bg-assent`}
+                onClick={() => handleOnSelectSliderClick(i)}
+              />
+            ))}
+          </div>
+        </div>
+
+        <div className="flex items-center justify-between px-6 py-3">
           {project.technologies.map((tech) => (
-            <img className={`${styles.techIcon}`} src={tech.icon} key={tech.title}></img>
+            <img
+              key={tech.title}
+              src={tech.iconSrc}
+              alt={tech.title}
+              className="w-6 h-6"
+            />
           ))}
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

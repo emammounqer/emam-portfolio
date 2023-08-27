@@ -1,4 +1,3 @@
-import React, { forwardRef, useEffect } from "react";
 import { Link } from "react-scroll";
 import { navLinks } from "../../constant/navLinks";
 import { NavState } from "./NavBar";

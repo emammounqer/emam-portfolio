@@ -4,7 +4,7 @@ export function useInView<T extends HTMLElement>(
   opt?: IntersectionObserverInit,
   once?: boolean,
 ) {
-  const ref = useRef<T>(null!);
+  const ref = useRef<T>(null);
   const [isInView, setIsItInView] = useState(true);
   const [entry, setEntry] = useState<IntersectionObserverEntry>();
 
@@ -19,6 +19,7 @@ export function useInView<T extends HTMLElement>(
 
     const observer = new IntersectionObserver(callBack, opt);
     const elem = ref.current;
+    if (!elem) return;
     observer.observe(elem);
     return () => {
       observer.unobserve(elem);
